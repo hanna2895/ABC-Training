@@ -49,6 +49,7 @@ Website for a training company that needs to have users log in to their website 
 
  	Groups:
  		ID
+    name
  		Has Students (ID)
  		Has files
  		Has exams
