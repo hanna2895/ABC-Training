@@ -3,3 +3,20 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.navbar {
+  width: 100vw;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-div {
+  max-width: 30vw;
+  /* width: 30vw; */
+  height: auto;
+}
+
+.logo {
+  width: 100%;
+}
