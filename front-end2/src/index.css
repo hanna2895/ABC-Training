@@ -20,3 +20,9 @@ body {
 .logo {
   width: 100%;
 }
+
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

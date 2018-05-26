@@ -11,13 +11,15 @@ class Navbar extends Component {
           <img className="logo" src={logo}/>
         </div>
 
-        <div className="container">
+        <div className="nav-container">
         // login form will go here
+          <div className="button-holder">
               <button className="button button-primary">Home</button>
               <button className="button button-primary">Core Services</button>
               <button className="button button-primary">Our Team</button>
               <button className="button button-primary">News</button>
               <button className="button button-primary">Contact Us</button>
+          </div>
         </div>
       </div>
 
