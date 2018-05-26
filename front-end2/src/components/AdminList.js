@@ -1,10 +1,14 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { bind ActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import * as adminActions from '../actions/adminActions';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 class adminList extends React.Component {
+componentDidMount() { // here we are triggering the action => react lifecycle method
+  this.props.adminActions.fetchAdmins();
+}
+
   renderData() {
     return <div>{this.props.admins}</div>
   }
@@ -12,7 +16,8 @@ class adminList extends React.Component {
   render() {
     return (
       <div className="">
-        {this.props.admins.length > 0 ? this.renderData()
+        {this.props.admins.length > 0 ?
+          this.renderData()
           :
           <div className="">
             No Data
@@ -40,7 +45,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
- export default connect(
-   mapStateToProps,
-   mapDispatchToProps
- )(adminList)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(adminList);

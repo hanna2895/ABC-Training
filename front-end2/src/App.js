@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import AdminList from './components/AdminList';
 import logo from './logo.svg';
 import './App.css';
-import adminList from "./components/AdminList"
 
 class App extends Component {
   render() {

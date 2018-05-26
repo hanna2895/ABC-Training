@@ -8,16 +8,13 @@ export function receiveAdmins(json) {
   return {type: types.RECEIVE_ADMINS, admins: json.admins};
 }
 
-// this makes a fetch call to my api to get all the admins 
-export function fetchStuff() {
+export function fetchAdmins() {
   return dispatch => {
     return fetch(url(), {
-      method: 'GET'
-      // mode: 'cors', <- do I need this?
-      // credentials: 'include', <- need this later
-
+      method: "GET"
+      // credentials: 'include'
     })
-    .then(response => response,json())
+    .then(response => response.json())
     .then(json => dispatch(receiveAdmins(json)))
   };
 }

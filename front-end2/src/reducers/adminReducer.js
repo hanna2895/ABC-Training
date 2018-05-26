@@ -5,11 +5,11 @@ export default function admins(state = initialState.admins, action) {
   let newState;
   switch(action.type) {
     case FETCH_ADMINS:
-      console.log('FETCH_ADMINS Action')
+      console.log('FETCH_ADMINS action')
       return action;
     case RECEIVE_ADMINS:
-      newState = action.stuff;
-      console.log('RECEIVE_ADMINS Action')
+      newState = action.admins;
+      console.log('RECEIVE_ADMINS action')
       return newState;
     default:
       return state;
