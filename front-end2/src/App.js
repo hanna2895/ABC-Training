@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AdminHolder from './components/AdminHolder';
 import Navbar from './components/Navbar';
+import ContentHolder from './components/ContentHolder';
 import logo from './logo.svg';
 import './App.css';
 
@@ -10,8 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <p>This is the app component being rendered</p>
-        <AdminHolder />
+        <ContentHolder />
       </div>
     );
   }

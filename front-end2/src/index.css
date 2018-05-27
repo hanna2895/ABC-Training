@@ -50,3 +50,13 @@ ul {
   justify-content: space-around;
   height: 65vh;
 }
+
+.content-holder {
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-group {
+  text-align: left;
+}
