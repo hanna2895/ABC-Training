@@ -5,21 +5,18 @@
 import React from 'react';
 
 const AdminList = (props) => {
-  console.log(props, 'this is props in adminlist')
   const admins = props.admins
   const ListOfAdmins = admins.map((admin, i) => {
     return (
-      <ul>
-        <li>Name: {admin.name}, Email: {admin.email} </li>
-      </ul>
+        <li key={admin.id}>Name: {admin.name}, Email: {admin.email} </li>
     )
   })
-  // const admins = admins;
-  // console.log(props.admins, 'this is admins from admin list component')
 
   return (
     <div>
-      {ListOfAdmins}
+      <ul>
+        {ListOfAdmins}
+      </ul>
     </div>
   )
 }

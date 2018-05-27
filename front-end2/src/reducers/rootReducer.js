@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import admins from './adminReducer';
+// import admins from './adminReducer';
+import users from './userReducer'
 
 const rootReducer = combineReducers({
-  admins
+  users
 });
 
 export default rootReducer;

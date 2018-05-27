@@ -1,2 +1,5 @@
 export const FETCH_ADMINS = 'FETCH_ADMINS';
 export const RECEIVE_ADMINS = 'RECEIVE_ADMINS';
+
+export const LOG_IN = 'LOG_IN';
+export const CHECK_LOGIN_SUCCESS = 'CHECK_LOGIN_SUCCESS';
