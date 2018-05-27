@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
 }
 
+/* ----------- NAV STYLES ------------- */
 .navbar {
   width: 100vw;
   border: 1px solid black;
@@ -25,4 +26,27 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+/* ------------list styles ------------------ */
+ul {
+  border: 1px solid black;
+  overflow: scroll;
+}
+
+.list-holder, .admin-holder {
+  border: 1px solid black;
+  padding: 2%;
+  height: 50vh;
+}
+
+.list-container {
+  width: 48%;
+}
+
+.admin-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 65vh;
 }

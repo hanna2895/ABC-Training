@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AdminList from './AdminList';
+import AdminShow from './AdminShow';
 
 class AdminHolder extends Component {
   constructor() {
@@ -32,7 +33,10 @@ class AdminHolder extends Component {
 
   render() {
     return(
-      <AdminList admins={this.state.admins}/>
+      <div className="admin-holder">
+        <AdminShow />
+        <AdminList admins={this.state.admins}/>
+      </div>
     )
   }
 }

@@ -13,10 +13,13 @@ const AdminList = (props) => {
   })
 
   return (
-    <div>
-      <ul>
-        {ListOfAdmins}
-      </ul>
+    <div className="list-container">
+      <h2> All Admins </h2>
+      <div className="list-holder">
+        <ul>
+          {ListOfAdmins}
+        </ul>
+      </div>
     </div>
   )
 }
