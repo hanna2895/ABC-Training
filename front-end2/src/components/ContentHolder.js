@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AdminHolder from './AdminHolder';
-import UserHolder from './UserHolder';
+import StudentHolder from './StudentHolder';
 import GroupHolder from './GroupHolder';
 import MaterialHolder from './MaterialHolder';
 import Nav2 from './Nav2';
@@ -11,7 +11,7 @@ class ContentHolder extends Component {
     this.state = {
       showSettings: true,
       showGroups: false,
-      showUsers: false,
+      showStudents: false,
       showCourseMaterials: false
     }
   }
@@ -20,7 +20,7 @@ class ContentHolder extends Component {
     this.setState({
       showSettings: true,
       showGroups: false,
-      showUsers: false,
+      showStudents: false,
       showCourseMaterials: false
     })
   }
@@ -29,17 +29,17 @@ class ContentHolder extends Component {
     this.setState({
       showSettings: false,
       showGroups: true,
-      showUsers: false,
+      showStudents: false,
       showCourseMaterials: false
     })
   }
 
-  clickUsers = () => {
+  clickStudents = () => {
     console.log(this)
     this.setState({
       showSettings: false,
       showGroups: false,
-      showUsers: true,
+      showStudents: true,
       showCourseMaterials: false
     })
   }
@@ -48,7 +48,7 @@ class ContentHolder extends Component {
     this.setState({
       showSettings: false,
       showGroups: false,
-      showUsers: false,
+      showStudents: false,
       showCourseMaterials: true
     })
   }
@@ -57,10 +57,10 @@ class ContentHolder extends Component {
     return (
       <div className="content-holder">
         <p> This is the content holder </p>
-        <Nav2 clickUsers={this.clickUsers} clickSettings={this.clickSettings} clickGroups={this.clickGroups} clickCourseMaterials={this.clickCourseMaterials} />
+        <Nav2 clickStudents={this.clickStudents} clickSettings={this.clickSettings} clickGroups={this.clickGroups} clickCourseMaterials={this.clickCourseMaterials} />
 
         {this.state.showSettings ? <AdminHolder /> : null }
-        {this.state.showUsers ? <UserHolder /> : null}
+        {this.state.showStudents ? <StudentHolder /> : null}
         {this.state.showGroups ? <GroupHolder /> : null }
         {this.state.showCourseMaterials ? <MaterialHolder /> : null}
       </div>
