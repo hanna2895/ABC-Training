@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ClientList from './ClientList';
 import GroupList from './GroupList';
+import AddGroup from './AddGroup';
 
 // list the clients
 // when the user clicks on a client
@@ -11,7 +12,10 @@ class GroupHolder extends Component {
     super();
     this.state = {
       clients: [],
-      groups: []
+      groups: [],
+      addingGroup: false,
+      selectedClient: "",
+      unassignedStudents: []
     }
   }
 
@@ -42,20 +46,47 @@ class GroupHolder extends Component {
     })
 
     const groups = await groupsJson.json();
-    console.log(groups, 'this is groups')
+    const client = groups.client.name
     const groupsArray = groups.group
-    console.log(groupsArray, 'this is groups array')
     this.setState({
-      groups: groupsArray
+      groups: groupsArray,
+      selectedClient: client
     })
-    console.log(this.state, 'this is state')
   }
+
+  toggleAddGroup = () => {
+    console.log('toggleAddGroup is being called')
+    this.setState({
+      addingGroup: !this.state.addingGroup
+    })
+    this.getUnassignedStudents()
+  }
+
+  getUnassignedStudents = async() => {
+    const unassignedJson = await fetch('http://localhost:3000/unassigned', {
+      method: "GET"
+      // credentials: 'include'
+    })
+    const students = await unassignedJson.json();
+    this.setState({
+      unassignedStudents: students.unassigned_students
+    })
+
+  }
+
+  // make a function that gets all the users that are not assigned to a group to populate the add group form
+  // then will need an edit user function that edits the group id of those users
 
   render () {
     return (
-      <div className="admin-holder">
-        <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient}/>
-        <GroupList groups={this.state.groups} />
+      <div>
+        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents}/> </div>
+          : <div className="admin-holder">
+            <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient}/>
+            <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
+          </div>
+        }
+
       </div>
     )
   }

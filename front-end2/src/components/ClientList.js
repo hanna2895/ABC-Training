@@ -21,6 +21,8 @@ const ClientList = ({ clients, getGroups }) => {
         <ul>
           {ListOfClients}
         </ul>
+        <button> Edit this Client </button>
+        <button> Add a New Client </button>
       </div>
     </div>
   )
