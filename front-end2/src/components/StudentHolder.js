@@ -26,14 +26,11 @@ class StudentHolder extends Component {
       // credentials: 'include'
     });
     const students = await studentsJson.json();
-    console.log(students)
     const studentsArray = students.students
-    console.log(studentsArray);
     return studentsArray
   }
 
   render() {
-    // this.getStudents()
     return(
       <div>
         <div className="admin-holder">
