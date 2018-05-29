@@ -6,7 +6,9 @@ export function checkLoginSuccess(json) {
 }
 
 export function logIn(email, password) {
+    console.log(email, password)
   return dispatch => {
+    console.log(password, ' this is password')
     return fetch('http://localhost:3000/login', {
       method: "POST",
       // credentials: 'include',

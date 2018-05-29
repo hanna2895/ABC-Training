@@ -11,7 +11,6 @@ import * as userActions from '../actions/userActions';
 
 class Navbar extends Component {
   componentDidMount() {
-    console.log(this.props, 'this is props in navbar')
     // const { store } = this.context;
     // this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
@@ -25,7 +24,6 @@ class Navbar extends Component {
   // }
 
   render() {
-    console.log(this.props, 'this is props in render function of navbar')
     // const { store } = this.context;
     // const state = store.getState();
     // console.log(state, 'this is state from navbar render')
@@ -62,10 +60,10 @@ const mapStateToProps = function(state){
   }
 }
 
-const mapDispatchToProps = function(dispatch) {
-  return bindActionCreators({
-    log_in: userActions.logIn
-  }, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    log_in: (email, password) => dispatch(userActions.logIn(email, password))
+  }
 }
 
 

@@ -10,7 +10,10 @@ class AddGroup extends Component {
   }
 
   handleChange = (e) => {
-    const student = e.currentTarget.value;
+    const student = {
+      name: e.currentTarget.value,
+      id: e.currentTarget.id
+    }
     console.log(e.currentTarget)
     console.log(student, 'this is the clicked student')
 
@@ -35,13 +38,14 @@ class AddGroup extends Component {
     e.preventDefault()
     console.log('clicked')
     console.log(this.state)
-    this.props.addGroup(this.state.group)
+    this.props.addGroup(this.state.group, this.state.selectedStudents)
+    // this.props.updateStudentGroupId(this.state.selectedStudents)
   }
 
   render() {
     const unassignedStudents = this.props.unassignedStudents.map((student, i) => {
       return (
-        <option key={student.id} value={student.name} onClick={this.handleChange}>{student.name}</option>
+        <option key={student.id} id={student.id} value={student.name} onClick={this.handleChange}>{student.name}</option>
       )
     })
 

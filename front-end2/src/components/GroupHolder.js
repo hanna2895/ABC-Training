@@ -93,7 +93,7 @@ class GroupHolder extends Component {
   // make a function that gets all the users that are not assigned to a group to populate the add group form
   // then will need an edit user function that edits the group id of those users
 
-  addGroup = async (groupName) => {
+  addGroup = async (groupName, selectedStudents) => {
     const group = await fetch('http://localhost:3000/groups', {
       method: "POST",
       // credentials: 'include',
@@ -107,12 +107,33 @@ class GroupHolder extends Component {
     console.log(groupParsed, 'this is the response')
     this.toggleAddGroup()
     this.getGroupsByClient(this.state.selectedClientId)
+    this.updateStudentGroupId(selectedStudents, groupParsed)
+  }
+
+  updateStudentGroupId = async (students, groupJson) => {
+    console.log(students)
+    // console.log(students["0"].id)
+    if (students.length === 0) {
+      return;
+    } else {
+      for (let i = 0; i < students.length; i++) {
+        const student = await fetch('http://localhost:3000/students/' + students[i].id, {
+          method: "PUT",
+          body: JSON.stringify({
+            group_id: groupJson.group.id
+          })
+        });
+        console.log(student,' this is the student returned in update student group id')
+        const studentParsed = await student.json();
+        console.log(studentParsed, 'this is studentparsed')
+      }
+    }
   }
 
   render () {
     return (
       <div>
-        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup}/> </div>
+        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup} updateStudentGroupId={this.updateStudentGroupId}/> </div>
           : <div className="admin-holder">
             <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient}/>
             <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
