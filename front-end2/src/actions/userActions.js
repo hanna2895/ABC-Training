@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
 export function checkLoginSuccess(json) {
-  console.log(json)
+  console.log(json, "this is the json returned from login")
   return {type: types.LOG_IN}
 }
 
