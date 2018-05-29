@@ -15,6 +15,7 @@ class GroupHolder extends Component {
       groups: [],
       addingGroup: false,
       selectedClient: "",
+      selectedClientId: "",
       unassignedStudents: []
     }
   }
@@ -50,7 +51,8 @@ class GroupHolder extends Component {
     const groupsArray = groups.group
     this.setState({
       groups: groupsArray,
-      selectedClient: client
+      selectedClient: client,
+      selectedClientId: id
     })
   }
 
@@ -77,10 +79,25 @@ class GroupHolder extends Component {
   // make a function that gets all the users that are not assigned to a group to populate the add group form
   // then will need an edit user function that edits the group id of those users
 
+  addGroup = async (groupName) => {
+    const group = await fetch('http://localhost:3000/groups', {
+      method: "POST",
+      // credentials: 'include',
+      body: JSON.stringify({
+        name: groupName,
+        client_id: this.state.selectedClientId
+      })
+    });
+    console.log(group, 'this is group from addgroup')
+    const groupParsed = await group.json();
+
+    console.log(groupParsed)
+  }
+
   render () {
     return (
       <div>
-        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents}/> </div>
+        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup}/> </div>
           : <div className="admin-holder">
             <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient}/>
             <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />

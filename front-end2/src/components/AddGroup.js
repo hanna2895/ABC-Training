@@ -11,26 +11,37 @@ class AddGroup extends Component {
 
   handleChange = (e) => {
     const student = e.currentTarget.value;
+    console.log(e.currentTarget)
     console.log(student, 'this is the clicked student')
-    if (this.state.selectedStudents.length === 0) {
-      console.log('setting state when length is 0')
-      this.setState({
-        selectedStudents: [e.currentTarget.value]
-      })
-      console.log(this.state.selectedStudents, 'in length=0')
-    } else {
-      this.setState({
-        selectedStudents: [...this.state.selectedStudents, student]
-      })
-    }
+
+    this.setState({
+      selectedStudents: [...this.state.selectedStudents, student]
+    })
 
     console.log(this.state.selectedStudents)
+  }
+
+  handleInput = (e) => {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('clicked')
+    console.log(this.state)
+    this.props.addGroup(this.state.group)
   }
 
   render() {
     const unassignedStudents = this.props.unassignedStudents.map((student, i) => {
       return (
-        <option key={student.id} value={student.name}>{student.name}</option>
+        <option key={student.id} value={student.name} onClick={this.handleChange}>{student.name}</option>
       )
     })
 
@@ -41,12 +52,12 @@ class AddGroup extends Component {
           <label> Client Name: </label> <br />
           <input readOnly type="text" name="client" value={this.props.selectedClient} placeholder={this.props.selectedClient}/><br />
           <label> Group Name: </label> <br />
-          <input type="text" name="group" value={this.state.group} /> <br />
+          <input type="text" name="group" value={this.state.group} onChange={this.handleInput}/> <br />
           <label> Add Students: </label> <br />
-          <select multiple="true" value={this.state.selectedStudents} onChange={this.handleChange}>
+          <select multiple="true" name="students" value={this.state.selectedStudents} readOnly>
             {unassignedStudents}
           </select> < br />
-          <button>Add Group </button>
+          <button onClick={this.handleSubmit}>Add Group </button>
         </form>
       </div>
     )
