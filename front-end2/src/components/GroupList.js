@@ -10,7 +10,7 @@ const GroupList = ({ groups, selectedClient, toggleAddGroup }) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log('this is being clicked')
-    if(selectedClient != "") {
+    if(selectedClient !== "") {
       toggleAddGroup();
     } else {
       // toggle a modal or something to say that you must first select a client to create a new group

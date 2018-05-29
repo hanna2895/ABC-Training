@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import logo from '../generic-logo.jpg';
-// import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import * as actionCreators from './actionCreators';
 import LoginForm from './LoginForm';
@@ -30,7 +28,7 @@ class Navbar extends Component {
     return (
       <div className="navbar">
         <div className="logo-div">
-          <img className="logo" src={logo}/>
+          <img className="logo" src={logo} alt="logo"/>
         </div>
 
         <div className="nav-container">
