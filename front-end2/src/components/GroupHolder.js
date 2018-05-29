@@ -30,6 +30,20 @@ class GroupHolder extends Component {
       });
   }
 
+  // componentDidUpdate() {
+  //   if (this.state.selectedClient != "") {
+  //     this.getGroupsByClient(this.state.selectedClientId)
+  //       .then((groups) => {
+  //         this.setState({
+  //           groups: groups
+  //         })
+  //       })
+  //       .catch((err) => {
+  //         console.log(err)
+  //       });
+  //   }
+  // }
+
   getClients = async () => {
     const clientsJson = await fetch('http://localhost:3000/clients', {
       method: "GET"
@@ -90,8 +104,9 @@ class GroupHolder extends Component {
     });
     console.log(group, 'this is group from addgroup')
     const groupParsed = await group.json();
-
-    console.log(groupParsed)
+    console.log(groupParsed, 'this is the response')
+    this.toggleAddGroup()
+    this.getGroupsByClient(this.state.selectedClientId)
   }
 
   render () {
