@@ -9,11 +9,10 @@ export default function users(state = initialState.logged_in, action) {
       return action;
     case CHECK_LOGIN_SUCCESS:
       console.log('checkLoginSuccess called')
-      return action;
-      // return (
-      //   ...state,
-      //   logged_in: true
-      // )
+      // return action;
+      return (
+        state.logged_in: true
+      )
     default:
       return state;
   }
