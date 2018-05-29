@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AdminHolder from './AdminHolder';
 import StudentHolder from './StudentHolder';
 import GroupHolder from './GroupHolder';
 import MaterialHolder from './MaterialHolder';
 import Nav2 from './Nav2';
+import StudentNav from './StudentNav';
+import StudentShow from './StudentShow';
+import StudentMaterialHolder from './StudentMaterialHolder';
 
 class ContentHolder extends Component {
   constructor() {
@@ -12,7 +16,9 @@ class ContentHolder extends Component {
       showSettings: false,
       showGroups: true,
       showStudents: false,
-      showCourseMaterials: false
+      showCourseMaterials: false,
+      showStudentCourseMaterials: true,
+      showStudentSettings: false
     }
   }
 
@@ -53,20 +59,50 @@ class ContentHolder extends Component {
     })
   }
 
-  render() {
-    return (
-      <div className="content-holder">
-        <p> This is the content holder </p>
-        <Nav2 clickStudents={this.clickStudents} clickSettings={this.clickSettings} clickGroups={this.clickGroups} clickCourseMaterials={this.clickCourseMaterials} />
+  toggleStudentView = () => {
+    this.setState({
+      showStudentCourseMaterials: !this.state.showStudentCourseMaterials
+    })
+  }
 
-        {this.state.showSettings ? <AdminHolder /> : null }
-        {this.state.showStudents ? <StudentHolder /> : null}
-        {this.state.showGroups ? <GroupHolder /> : null }
-        {this.state.showCourseMaterials ? <MaterialHolder /> : null}
+  render() {
+    console.log(this.props, 'props in content holder')
+    const is_admin = () => {
+      if (this.props.logged_in.user_type === "admin") {
+        return true;
+      } else {
+        return false
+      }
+    }
+
+
+    return (
+      <div>
+        {is_admin() ?
+          <div className="content-holder">
+            <p> This is the content holder </p>
+            <Nav2 clickStudents={this.clickStudents} clickSettings={this.clickSettings} clickGroups={this.clickGroups} clickCourseMaterials={this.clickCourseMaterials} />
+
+            {this.state.showSettings ? <AdminHolder /> : null }
+            {this.state.showStudents ? <StudentHolder /> : null}
+            {this.state.showGroups ? <GroupHolder /> : null }
+            {this.state.showCourseMaterials ? <MaterialHolder /> : null}
+            </div>
+            : <div>
+              <StudentNav toggleStudentView={this.toggleStudentView}/>
+              {this.state.showStudentCourseMaterials ? <StudentMaterialHolder /> : <StudentShow />}
+            </div>
+          }
       </div>
     )
   }
 
 }
 
-export default ContentHolder;
+const mapStateToProps = (state) => {
+  return {
+    logged_in: state.logged_in
+  }
+}
+
+export default connect(mapStateToProps)(ContentHolder);
