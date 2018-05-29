@@ -1,3 +1,3 @@
 export default {
-  logged_in: true
+  logged_in: ""
 };

@@ -1,14 +1,20 @@
 import initialState from './initialState';
-import { LOG_IN, CHECK_LOGIN_SUCCESS } from '../actions/actionTypes';
+import { STUDENT_LOGGED, ADMIN_LOGGED } from '../actions/actionTypes';
 
-export default function logged_in(state = initialState.logged_in, action) {
-  let newState;
+export default function user_type(state = initialState, action) {
   switch(action.type) {
-    case LOG_IN:
+    case STUDENT_LOGGED:
       console.log('checkLoginSuccess called')
       return {
         ...state,
-        logged_in: true
+        logged_in: true,
+        user_type: "student"
+      }
+    case ADMIN_LOGGED:
+      return {
+        ...state,
+        logged_in: true,
+        user_type: "admin"
       }
     default:
       return state;
