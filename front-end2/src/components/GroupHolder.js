@@ -3,7 +3,7 @@ import ClientList from './ClientList';
 import GroupList from './GroupList';
 import AddGroup from './AddGroup';
 import AddClient from './AddClient';
-
+import EditClient from './EditClient';
 
 class GroupHolder extends Component {
   constructor() {
@@ -13,6 +13,7 @@ class GroupHolder extends Component {
       groups: [],
       addingGroup: false,
       addingClient: false,
+      editingClient: false,
       selectedClient: "",
       selectedClientId: "",
       unassignedStudents: []
@@ -20,13 +21,7 @@ class GroupHolder extends Component {
   }
 
   componentDidMount() {
-    this.getClients()
-      .then((clients) => {
-        this.setState({clients: clients})
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+    this.updateClientList();
   }
 
   getClients = async () => {
@@ -119,6 +114,16 @@ class GroupHolder extends Component {
     })
   }
 
+  updateClientList = () => {
+    this.getClients()
+      .then((clients) => {
+        this.setState({clients: clients})
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
   addClient = async (clientName) => {
     const client = await fetch('http://localhost:3000/clients', {
       method: "POST",
@@ -129,14 +134,34 @@ class GroupHolder extends Component {
     });
     const clientParsed = await client.json();
     console.log(clientParsed)
-    this.toggleAddClient()
-    this.getClients()
-      .then((clients) => {
-        this.setState({clients: clients})
+    this.toggleAddClient();
+    this.updateClientList();
+  }
+
+  toggleEditClient = () => {
+    console.log('toggle edit client')
+    if (this.state.selectedClient !== "") {
+      this.setState({
+        editingClient: !this.state.editingClient
       })
-      .catch((err) => {
-        console.log(err)
-      });
+    } else {
+      // somehow render a message that says you must first select a client to edit
+      // maybe figure out how to grey out the edit button until one is selected
+    }
+  }
+
+  editClient = async (clientName) => {
+    const client = await fetch('http://localhost:3000/clients/' + this.state.selectedClientId, {
+      method: "PUT",
+      // credentials: 'include',
+      body: JSON.stringify({
+        name: clientName
+      })
+    })
+    const clientParsed = await client.json();
+    console.log(clientParsed)
+    this.toggleEditClient();
+    this.updateClientList()
   }
 
 
@@ -146,13 +171,17 @@ class GroupHolder extends Component {
         {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup} updateStudentGroupId={this.updateStudentGroupId}/> </div>
           : <div> {
             this.state.addingClient ? <div className="admin-holder"> <AddClient addClient={this.addClient}/> </div>
-            : <div className="admin-holder">
-              <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient}/>
-              <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
-            </div>
-          } </div>
+            : <div> {this.state.editingClient ? <div className="admin-holder"> <EditClient selectedClient={this.state.selectedClient} editClient={this.editClient}/> </div>
+              : <div className="admin-holder">
+                <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient}/>
+                <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
+              </div>
+            }
+           </div>
         }
 
+        </div>
+      }
       </div>
     )
   }

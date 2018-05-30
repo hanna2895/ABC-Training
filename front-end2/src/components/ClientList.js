@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ClientList = ({ clients, getGroups, toggleAddClient }) => {
+const ClientList = ({ clients, getGroups, toggleAddClient, toggleEditClient }) => {
 
   const handleClick = (e) => {
     const id = e.currentTarget.id
@@ -21,7 +21,7 @@ const ClientList = ({ clients, getGroups, toggleAddClient }) => {
         <ul>
           {ListOfClients}
         </ul>
-        <button> Edit this Client </button>
+        <button onClick={toggleEditClient}> Edit this Client </button>
         <button onClick={toggleAddClient}> Add a New Client </button>
       </div>
     </div>
