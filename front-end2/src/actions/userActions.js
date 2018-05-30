@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 
 export function checkUserType(json) {
-  console.log(json, 'this is json returned in checkUserType')
   if (json.user_type === "student")
     return {type: types.STUDENT_LOGGED}
   else if (json.user_type === "admin") {

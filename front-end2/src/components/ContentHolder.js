@@ -66,7 +66,6 @@ class ContentHolder extends Component {
   }
 
   render() {
-    console.log(this.props, 'props in content holder')
     const is_admin = () => {
       if (this.props.logged_in.user_type === "admin") {
         return true;

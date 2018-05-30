@@ -51,7 +51,7 @@ class AddGroup extends Component {
 
     return (
       <div className="list-container">
-        <h2> Add A New Group </h2>
+        <h2> Add a New Group </h2>
         <form>
           <label> Client Name: </label> <br />
           <input readOnly type="text" name="client" value={this.props.selectedClient} placeholder={this.props.selectedClient}/><br />

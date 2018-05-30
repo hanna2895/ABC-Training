@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import ClientList from './ClientList';
 import GroupList from './GroupList';
 import AddGroup from './AddGroup';
+import AddClient from './AddClient';
 
-// list the clients
-// when the user clicks on a client
-// populate the group list box with that client's Groups
 
 class GroupHolder extends Component {
   constructor() {
@@ -14,6 +12,7 @@ class GroupHolder extends Component {
       clients: [],
       groups: [],
       addingGroup: false,
+      addingClient: false,
       selectedClient: "",
       selectedClientId: "",
       unassignedStudents: []
@@ -29,20 +28,6 @@ class GroupHolder extends Component {
         console.log(err)
       });
   }
-
-  // componentDidUpdate() {
-  //   if (this.state.selectedClient != "") {
-  //     this.getGroupsByClient(this.state.selectedClientId)
-  //       .then((groups) => {
-  //         this.setState({
-  //           groups: groups
-  //         })
-  //       })
-  //       .catch((err) => {
-  //         console.log(err)
-  //       });
-  //   }
-  // }
 
   getClients = async () => {
     const clientsJson = await fetch('http://localhost:3000/clients', {
@@ -71,11 +56,12 @@ class GroupHolder extends Component {
   }
 
   toggleAddGroup = () => {
-    console.log('toggleAddGroup is being called')
     this.setState({
       addingGroup: !this.state.addingGroup
     })
-    this.getUnassignedStudents()
+    if (this.state.addingGroup) {
+      this.getUnassignedStudents()
+    }
   }
 
   getUnassignedStudents = async() => {
@@ -89,9 +75,6 @@ class GroupHolder extends Component {
     })
 
   }
-
-  // make a function that gets all the users that are not assigned to a group to populate the add group form
-  // then will need an edit user function that edits the group id of those users
 
   addGroup = async (groupName, selectedStudents) => {
     const group = await fetch('http://localhost:3000/groups', {
@@ -112,7 +95,6 @@ class GroupHolder extends Component {
 
   updateStudentGroupId = async (students, groupJson) => {
     console.log(students)
-    // console.log(students["0"].id)
     if (students.length === 0) {
       return;
     } else {
@@ -130,14 +112,45 @@ class GroupHolder extends Component {
     }
   }
 
+  toggleAddClient = () => {
+    console.log('toggle add client is being clicked')
+    this.setState({
+      addingClient: !this.state.addingClient
+    })
+  }
+
+  addClient = async (clientName) => {
+    const client = await fetch('http://localhost:3000/clients', {
+      method: "POST",
+      // credentials: 'include',
+      body: JSON.stringify({
+        name: clientName
+      })
+    });
+    const clientParsed = await client.json();
+    console.log(clientParsed)
+    this.toggleAddClient()
+    this.getClients()
+      .then((clients) => {
+        this.setState({clients: clients})
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
+
   render () {
     return (
       <div>
         {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup} updateStudentGroupId={this.updateStudentGroupId}/> </div>
-          : <div className="admin-holder">
-            <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient}/>
-            <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
-          </div>
+          : <div> {
+            this.state.addingClient ? <div className="admin-holder"> <AddClient addClient={this.addClient}/> </div>
+            : <div className="admin-holder">
+              <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient}/>
+              <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
+            </div>
+          } </div>
         }
 
       </div>
