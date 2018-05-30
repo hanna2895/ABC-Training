@@ -43,6 +43,7 @@ ul {
 .list-container {
   width: 48%;
   text-align: left;
+  margin: 10px;
 }
 
 .admin-holder {
@@ -60,4 +61,9 @@ ul {
 
 .button-group {
   text-align: left;
+}
+
+.two-containers {
+  width: 100%;
+  display: flex;
 }

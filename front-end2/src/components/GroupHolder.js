@@ -4,6 +4,7 @@ import GroupList from './GroupList';
 import AddGroup from './AddGroup';
 import AddClient from './AddClient';
 import EditClient from './EditClient';
+import GroupShow from './GroupShow';
 
 class GroupHolder extends Component {
   constructor() {
@@ -14,8 +15,11 @@ class GroupHolder extends Component {
       addingGroup: false,
       addingClient: false,
       editingClient: false,
+      viewGroup: false,
       selectedClient: "",
       selectedClientId: "",
+      selectedGroup: "",
+      selectedGroupId: "",
       unassignedStudents: []
     }
   }
@@ -139,7 +143,6 @@ class GroupHolder extends Component {
   }
 
   toggleEditClient = () => {
-    console.log('toggle edit client')
     if (this.state.selectedClient !== "") {
       this.setState({
         editingClient: !this.state.editingClient
@@ -164,6 +167,23 @@ class GroupHolder extends Component {
     this.updateClientList()
   }
 
+  toggleGroupShow = (group, groupId) => {
+    console.log('togglegroupshow is called')
+    console.log(group, groupId, 'this is group and groupId in toggleGroupShow')
+    this.setState({
+      selectedGroup: group,
+      selectedGroupId: groupId,
+      viewGroup: !this.state.viewGroup
+    })
+    console.log(this.state, 'this is state')
+    // this.showGroupShow()
+  }
+  //
+  // showGroupShow = () => {
+  //   this.setState({
+  //
+  //   })
+  // }
 
   render () {
     return (
@@ -172,14 +192,16 @@ class GroupHolder extends Component {
           : <div> {
             this.state.addingClient ? <div className="admin-holder"> <AddClient addClient={this.addClient}/> </div>
             : <div> {this.state.editingClient ? <div className="admin-holder"> <EditClient selectedClient={this.state.selectedClient} editClient={this.editClient}/> </div>
-              : <div className="admin-holder">
-                <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient}/>
-                <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} />
-              </div>
+              : <div >{this.state.viewGroup ? <div className="admin-holder"> <GroupShow selectedGroupId={this.state.selectedGroupId} selectedClient={this.state.selectedClient}/> </div>
+                : <div className="admin-holder">
+                  <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient}/>
+                  <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} toggleGroupShow={this.toggleGroupShow}/>
+                </div>
+
+              }</div>
             }
            </div>
         }
-
         </div>
       }
       </div>
