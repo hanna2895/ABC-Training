@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StudentList from './StudentList';
 import GroupInfo from './GroupInfo';
+import EditGroup from './EditGroup';
 
 class GroupShow extends Component {
   constructor() {
@@ -8,12 +9,12 @@ class GroupShow extends Component {
     this.state = {
       students: [],
       groupId: "",
-      group: ""
+      group: "",
+      editingGroup: false
     }
   }
 
   componentWillMount = () => {
-    console.log(this.props, 'this is props')
     this.setState({
       groupId: this.props.selectedGroupId,
       clientName: this.props.selectedClient
@@ -31,31 +32,46 @@ class GroupShow extends Component {
       method: "GET"
       // credentials: 'include'
     })
-    console.log(group, 'this is group')
     const groupParsed = await group.json()
-    console.log(groupParsed, 'this is groupParsed')
     this.setState({
       group: groupParsed,
       students: groupParsed.students
     })
   }
 
+  toggleEditGroup = () => {
+    console.log('toggle edit group is being clicked')
+    this.setState({
+      editingGroup: !this.state.editingGroup
+    })
+  }
+
+  editGroup = async (groupName) => {
+    const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
+      method: "PUT",
+      // credentials: 'include',
+      body: JSON.stringify({
+        name: groupName
+      })
+    });
+    const groupParsed = await group.json();
+    console.log(groupParsed, 'this is group parsed')
+    this.toggleEditGroup();
+    this.getGroupInfo();
+  }
+
   render() {
-    console.log(this.state, 'this is state in groupshow')
-    // const groupName = () => {
-    //   if (this.state.group.group.name) {
-    //     return (
-    //       <p>this.state.group.group.name</p>
-    //     )
-    //   }
-    // }
-    // console.log(groupName)
 
     return (
-      <div className="two-containers">
-        {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient}/> : null}
+      <div>
+        {this.state.editingGroup ? <div> <EditGroup groupName={this.state.group.group.name} editGroup={this.editGroup}/> </div>
+          : <div className="two-containers">
+          {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup}/>
+            : null }
 
-        <StudentList students={this.state.students}/>
+          <StudentList students={this.state.students}/>
+          </div>
+        }
       </div>
     )
   }
