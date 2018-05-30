@@ -41,7 +41,7 @@ class GroupHolder extends Component {
   getGroupsByClient = async (id) => {
     const groupsJson = await fetch('http://localhost:3000/clients/' + id, {
       method: "GET"
-      // credentials: "include"
+      credentials: "include"
     })
 
     const groups = await groupsJson.json();
@@ -66,7 +66,7 @@ class GroupHolder extends Component {
   getUnassignedStudents = async() => {
     const unassignedJson = await fetch('http://localhost:3000/unassigned', {
       method: "GET"
-      // credentials: 'include'
+      credentials: 'include'
     })
     const students = await unassignedJson.json();
     this.setState({
@@ -78,7 +78,7 @@ class GroupHolder extends Component {
   addGroup = async (groupName, selectedStudents) => {
     const group = await fetch('http://localhost:3000/groups', {
       method: "POST",
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         name: groupName,
         client_id: this.state.selectedClientId
@@ -131,7 +131,7 @@ class GroupHolder extends Component {
   addClient = async (clientName) => {
     const client = await fetch('http://localhost:3000/clients', {
       method: "POST",
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         name: clientName
       })
@@ -156,7 +156,7 @@ class GroupHolder extends Component {
   editClient = async (clientName) => {
     const client = await fetch('http://localhost:3000/clients/' + this.state.selectedClientId, {
       method: "PUT",
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         name: clientName
       })

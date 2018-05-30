@@ -30,7 +30,7 @@ class GroupShow extends Component {
   getGroupInfo = async () => {
     const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
       method: "GET"
-      // credentials: 'include'
+      credentials: 'include'
     })
     const groupParsed = await group.json()
     this.setState({
@@ -47,13 +47,14 @@ class GroupShow extends Component {
   }
 
   editGroup = async (groupName) => {
+    console.log('this is what is being called', groupName, this.state.groupId)
     const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
       method: "PUT",
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         name: groupName
       })
-    });
+    })
     const groupParsed = await group.json();
     console.log(groupParsed, 'this is group parsed')
     this.toggleEditGroup();

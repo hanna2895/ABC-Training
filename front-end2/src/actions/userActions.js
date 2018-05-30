@@ -14,7 +14,7 @@ export function logIn(email, password) {
   return dispatch => {
     return fetch('http://localhost:3000/login', {
       method: "POST",
-      // credentials: 'include',
+      credentials: 'include',
       body: JSON.stringify({
         email: email,
         password: password

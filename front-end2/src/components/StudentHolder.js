@@ -23,7 +23,7 @@ class StudentHolder extends Component {
   getStudents = async () => {
     const studentsJson = await fetch('http://localhost:3000/students', {
       method: "GET"
-      // credentials: 'include'
+      credentials: 'include'
     });
     const students = await studentsJson.json();
     const studentsArray = students.students
