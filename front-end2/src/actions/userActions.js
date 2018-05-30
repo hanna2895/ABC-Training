@@ -6,6 +6,8 @@ export function checkUserType(json) {
     return {type: types.STUDENT_LOGGED}
   else if (json.user_type === "admin") {
     return {type: types.ADMIN_LOGGED}
+  } else {
+    return {type: types.LOGIN_FAILED}
   }
 }
 

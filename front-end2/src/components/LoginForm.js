@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class LoginForm extends Component {
   constructor() {
@@ -25,7 +26,16 @@ class LoginForm extends Component {
     this.props.logIn(this.state.email, this.state.password)
   }
 
+  checkForMessage = () => {
+    if (this.props.logged_in.message !== "") {
+      return (
+        <p> {this.props.logged_in.message} </p>
+      )
+    }
+  }
+
   render() {
+    const message = this.checkForMessage()
     return (
       <div>
         <form>
@@ -34,10 +44,17 @@ class LoginForm extends Component {
           <label> Password: </label>
           <input type="password" name="password" placeholder="password" onChange={this.handleInput}/>
           <button onClick={this.handleSubmit}>Log In </button>
-        </form>
+        </form> <br />
+        {message}
       </div>
     )
   }
 }
 
-export default LoginForm;
+const mapStateToProps = function(state){
+  return{
+    logged_in: state.logged_in
+  }
+}
+
+export default connect(mapStateToProps)(LoginForm);

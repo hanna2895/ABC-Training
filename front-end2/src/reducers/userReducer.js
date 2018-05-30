@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { STUDENT_LOGGED, ADMIN_LOGGED } from '../actions/actionTypes';
+import { STUDENT_LOGGED, ADMIN_LOGGED, LOGIN_FAILED } from '../actions/actionTypes';
 
 export default function user_type(state = initialState, action) {
   switch(action.type) {
@@ -15,6 +15,11 @@ export default function user_type(state = initialState, action) {
         ...state,
         logged_in: true,
         user_type: "admin"
+      }
+    case LOGIN_FAILED:
+      return {
+        ...state,
+        message: "Your username or password was incorrect. Please try again or contact your system administrator."
       }
     default:
       return state;
