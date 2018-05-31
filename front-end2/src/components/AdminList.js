@@ -20,6 +20,7 @@ const AdminList = (props) => {
           {ListOfAdmins}
         </ul>
       </div>
+      <button onClick={props.toggleAddAdmin}> Add New Admin </button>
     </div>
   )
 }

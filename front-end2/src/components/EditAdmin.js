@@ -23,9 +23,6 @@ class EditAdmin extends Component {
     const target = e.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
-    console.log(target, 'this is target')
-    console.log(value, 'this is value')
-    console.log(name, 'this is name')
     this.setState({
       [name]: value
     })

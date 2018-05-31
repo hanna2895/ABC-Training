@@ -80,14 +80,36 @@ class AdminHolder extends Component {
     })
   }
 
+  addAdmin = async (adminName, email, password, isLeadAdmin) => {
+    console.log('add admin is being called')
+    const admin = await fetch('http://localhost:3000/admins', {
+      method: "POST",
+      credentials: 'include',
+      body: JSON.stringify({
+        name: adminName,
+        email: email,
+        password: password,
+        is_lead_admin: isLeadAdmin
+      })
+    })
+    console.log(admin)
+    const adminParsed = await admin.json();
+    console.log(adminParsed)
+    this.getAdmins();
+    this.toggleAddAdmin();
+
+  }
+
+
+
   render() {
     return(
       <div className="admin-holder">
         {this.state.editingAdmin ? <EditAdmin adminName={this.state.adminName} email={this.state.email} isLeadAdmin={this.state.isLeadAdmin} editAdmin={this.editAdmin}/>
-        : <div>{ this.state.addAdmin ? <AddAdmin />
+        : <div>{ this.state.addAdmin ? <AddAdmin addAdmin={this.addAdmin}/>
           : <div>
             <AdminShow adminName={this.state.adminName} email={this.state.email} toggleEditAdmin={this.toggleEditAdmin} isLeadAdmin={this.state.isLeadAdmin}/>
-            <AdminList admins={this.state.admins}/>
+            <AdminList admins={this.state.admins} toggleAddAdmin={this.toggleAddAdmin}/>
           </div>
 
           } </div>
