@@ -71,7 +71,7 @@ class StudentHolder extends Component {
       <div>
         <div className="admin-holder">
           {this.state.addingStudent ? <AddStudent addStudent={this.addStudent}/>
-          : <div> {this.state.viewingStudent ? <StudentShow selectedStudentId={this.state.selectedStudentId} toggleViewStudent={this.toggleViewStudent}/>
+          : <div> {this.state.viewingStudent ? <StudentShow selectedStudentId={this.state.selectedStudentId} toggleViewStudent={this.toggleViewStudent} updateStudentList={this.updateStudentList}/>
             : <StudentList students={this.state.students} toggleAddStudent={this.toggleAddStudent} toggleViewStudent={this.toggleViewStudent}/>
           } </div>
         }

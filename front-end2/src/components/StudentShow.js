@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StudentInfo from './StudentInfo';
 import EditStudent from './EditStudent';
+import DeleteModal from './DeleteModal';
 
 class StudentShow extends Component {
   constructor() {
@@ -9,7 +10,8 @@ class StudentShow extends Component {
       studentId: "",
       student: "",
       group: "unassigned",
-      editingStudent: false
+      editingStudent: false,
+      showDeleteModal: false
     }
   }
 
@@ -80,12 +82,40 @@ class StudentShow extends Component {
     this.props.toggleViewStudent();
   }
 
+  toggleDeleteModal = () => {
+    console.log('toggleDeleteModal is being called')
+    if (this.state.viewGroup || this.state.selectedClientId !== "") {
+      this.setState({
+        showDeleteModal: !this.state.showDeleteModal
+      })
+    }
+  }
+
+  deleteStudent = async (studentId) => {
+    console.log('delete student is being called')
+    if (studentId !== "") {
+      await fetch('http://localhost:3000/students/' + studentId, {
+        method: "DELETE",
+        credentials: 'include'
+      })
+    } else {
+      // says you must select a student to delete or grays out the button
+    }
+    this.toggleDeleteModal();
+    this.props.toggleViewStudent();
+    this.props.updateStudentList();
+
+  }
+
   render () {
     console.log(this.state, 'this is state from the render function in student show')
     return (
       <div>
         {this.state.editingStudent ? <div><EditStudent studentName={this.state.student.name} email={this.state.student.email} editStudent={this.editStudent}/> </div>
-          : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent}/>
+          : <div>{this.state.showDeleteModal ? <DeleteModal deleteStudent={this.deleteStudent} studentId={this.state.studentId} toggleDeleteModal={this.toggleDeleteModal}/>
+            : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent} toggleDeleteModal={this.toggleDeleteModal}/>
+          } </div>
+
 
         }
       </div>

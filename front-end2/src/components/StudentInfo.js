@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StudentInfo = ({studentName, email, group, password, toggleEditStudent}) => {
+const StudentInfo = ({studentName, email, group, password, toggleEditStudent, toggleDeleteModal}) => {
   return (
     <div className="list-container">
       <h2> Student Information </h2>
@@ -12,7 +12,7 @@ const StudentInfo = ({studentName, email, group, password, toggleEditStudent}) =
         <label> Group: </label>
         {group} <br />
         <button onClick={toggleEditStudent}> Edit This Student's Information </button>
-        <button> Delete This Student </button>
+        <button onClick={toggleDeleteModal}> Delete This Student </button>
       </div>
     </div>
   )
