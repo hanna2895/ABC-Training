@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GroupInfo = ({ groupName, clientName, toggleEditGroup }) => {
+const GroupInfo = ({ groupName, clientName, toggleEditGroup, toggleDeleteModal }) => {
   return (
     <div className="list-container">
       <h2> Group Details </h2>
@@ -10,6 +10,7 @@ const GroupInfo = ({ groupName, clientName, toggleEditGroup }) => {
         <label> Belongs to: </label>
         {clientName} <br />
         <button onClick={toggleEditGroup}> Edit This Group </button>
+        <button onClick={toggleDeleteModal}> Delete This Group </button>
       </div>
     </div>
     )

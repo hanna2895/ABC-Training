@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StudentList from './StudentList';
 import GroupInfo from './GroupInfo';
 import EditGroup from './EditGroup';
+import DeleteModal from './DeleteModal';
 
 class GroupShow extends Component {
   constructor() {
@@ -61,17 +62,20 @@ class GroupShow extends Component {
     this.getGroupInfo();
   }
 
+
   render() {
 
     return (
       <div>
         {this.state.editingGroup ? <div> <EditGroup groupName={this.state.group.group.name} editGroup={this.editGroup}/> </div>
-          : <div className="two-containers">
-          {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup}/>
-            : null }
+          : <div> { this.props.showDeleteModal ? <DeleteModal selectedGroup={this.state.groupId} deleteGroup={this.props.deleteGroup}/>
+            : <div className="two-containers">
+            {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup} toggleDeleteModal={this.props.toggleDeleteModal}/>
+              : null }
+            <StudentList students={this.state.students}/>
+            </div>
+          } </div>
 
-          <StudentList students={this.state.students}/>
-          </div>
         }
       </div>
     )

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Input, Container } from 'reactstrap';
 
 class DeleteModal extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.deleteClient(this.props.selectedClient)
+    if (this.props.deleteClient) {
+      this.props.deleteClient(this.props.selectedClient)
+    } else if (this.props.deleteGroup) {
+      this.props.deleteGroup(this.props.selectedGroup)
+    }
+
   }
 
   render() {

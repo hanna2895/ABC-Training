@@ -183,14 +183,16 @@ class GroupHolder extends Component {
 
   toggleDeleteModal = () => {
     console.log('toggleDeleteModal is being called')
-    this.setState({
-      showDeleteModal: !this.state.showDeleteModal
-    })
+    if (this.state.viewGroup || this.state.selectedClientId !== "") {
+      this.setState({
+        showDeleteModal: !this.state.showDeleteModal
+      })
+    }
   }
 
   deleteClient = async (clientId) => {
     if (clientId !== "") {
-      const client = await fetch('http://localhost:3000/clients/' + clientId, {
+      await fetch('http://localhost:3000/clients/' + clientId, {
         method: "DELETE",
         credentials: 'include'
       })
@@ -203,8 +205,29 @@ class GroupHolder extends Component {
     } else {
       // figure out how to set a message that says you must select a client before trying to delete, or gray out the button if it's blank
     }
-    this.toggleDeleteModal();
-    this.getClients();
+    this.getClients()
+      .then(this.toggleDeleteModal())
+  }
+
+  deleteGroup = async (groupId) => {
+    if (groupId !== "") {
+      await fetch('http://localhost:3000/groups/' + groupId, {
+        method: "DELETE",
+        credentials: 'include'
+      })
+
+      this.setState({
+        groups: this.state.groups.filter((group) => {
+          return group.id != groupId
+        })
+      })
+    } else {
+      // message that says you must select a group before deleting it
+    }
+    this.toggleDeleteModal()
+    this.toggleGroupShow()
+    this.updateClientList()
+
 
   }
 
@@ -215,7 +238,7 @@ class GroupHolder extends Component {
           : <div> {
             this.state.addingClient ? <div className="admin-holder"> <AddClient addClient={this.addClient}/> </div>
             : <div> {this.state.editingClient ? <div className="admin-holder"> <EditClient selectedClient={this.state.selectedClient} editClient={this.editClient}/> </div>
-              : <div >{this.state.viewGroup ? <div className="admin-holder"> <GroupShow selectedGroupId={this.state.selectedGroupId} selectedClient={this.state.selectedClient}/> </div>
+              : <div >{this.state.viewGroup ? <div className="admin-holder"> <GroupShow selectedGroupId={this.state.selectedGroupId} selectedClient={this.state.selectedClient} toggleDeleteModal={this.toggleDeleteModal} showDeleteModal={this.state.showDeleteModal} deleteGroup={this.deleteGroup}/> </div>
                 : <div> { this.state.showDeleteModal ? <div><DeleteModal isOpen={this.state.showDeleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteClient={this.deleteClient} selectedClient={this.state.selectedClientId}/></div>
                   : <div className="admin-holder">
                     <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient} toggleDeleteModal={this.toggleDeleteModal} />
