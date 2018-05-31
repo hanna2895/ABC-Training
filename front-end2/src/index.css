@@ -28,6 +28,25 @@ body {
   justify-content: space-around;
 }
 
+.button-holder {
+  margin-top: 1vh;
+  margin-right: 1.5vw;
+}
+
+.loginField {
+  height: 30px !important;
+  width: 100%;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  margin-right: 1.5vw;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+}
+
 /* ------------list styles ------------------ */
 ul {
   border: 1px solid black;
