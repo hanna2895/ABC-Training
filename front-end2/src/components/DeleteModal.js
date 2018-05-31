@@ -9,6 +9,8 @@ class DeleteModal extends Component {
       this.props.deleteGroup(this.props.selectedGroup)
     } else if (this.props.deleteStudent) {
       this.props.deleteStudent(this.props.studentId)
+    } else if (this.props.deleteAdmin) {
+      this.props.deleteAdmin(this.props.selectedAdmin)
     }
 
   }

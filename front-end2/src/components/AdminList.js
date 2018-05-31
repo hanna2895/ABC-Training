@@ -2,27 +2,55 @@
 // import { bindActionCreators } from 'redux';
 // import * as adminActions from '../actions/adminActions';
 // import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 
-const AdminList = (props) => {
-  const admins = props.admins
-  const ListOfAdmins = admins.map((admin, i) => {
+class AdminList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedAdmin: "",
+      selectedAdminId: ""
+    }
+  }
+
+  handleSelect = (e) => {
+    console.log(e.target.innerHTML, 'was clicked')
+    this.setState({
+      selectedAdmin: e.target.innerHTML,
+      selectedAdminId: e.target.id
+    })
+  }
+
+  handleClick = (e) => {
+    e.preventDefault();
+    this.props.toggleDeleteModal(this.state.selectedAdminId)
+  }
+
+  render() {
+    const admins = this.props.admins
+    const ListOfAdmins = admins.map((admin, i) => {
+      return (
+          <li key={admin.id} id={admin.id} onClick={this.handleSelect}>Name: {admin.name}, Email: {admin.email} </li>
+      )
+    })
+    console.log(this.state, 'this is state')
+
     return (
-        <li key={admin.id}>Name: {admin.name}, Email: {admin.email} </li>
-    )
-  })
 
-  return (
-    <div className="list-container">
-      <h2> All Admins </h2>
-      <div className="list-holder">
-        <ul>
-          {ListOfAdmins}
-        </ul>
+      <div className="list-container">
+        <h2> All Admins </h2>
+        <div className="list-holder">
+          <ul>
+            {ListOfAdmins}
+          </ul>
+        </div>
+        <button onClick={this.props.toggleAddAdmin}> Add New Admin </button>
+        <button onClick={this.handleClick}> Delete Selected Admin </button>
       </div>
-      <button onClick={props.toggleAddAdmin}> Add New Admin </button>
-    </div>
-  )
+    )
+  }
+
+
 }
 
 export default AdminList;

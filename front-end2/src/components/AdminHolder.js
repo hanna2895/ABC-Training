@@ -4,6 +4,8 @@ import AdminShow from './AdminShow';
 import { connect } from 'react-redux';
 import EditAdmin from './EditAdmin';
 import AddAdmin from './AddAdmin';
+import DeleteModal from './DeleteModal'
+
 
 class AdminHolder extends Component {
   constructor() {
@@ -14,11 +16,17 @@ class AdminHolder extends Component {
       email: "",
       isLeadAdmin: "",
       editingAdmin: false,
-      addAdmin: false
+      addAdmin: false,
+      showDeleteModal: false
     }
   }
 
   componentDidMount() {
+    this.loadAdminList()
+    this.showLoggedAdmin()
+  }
+
+  loadAdminList = () => {
     this.getAdmins()
       .then((admins) => {
         this.setState({admins: admins})
@@ -26,7 +34,6 @@ class AdminHolder extends Component {
       .catch((err) => {
         console.log(err)
       })
-    this.showLoggedAdmin()
   }
 
   getAdmins = async () => {
@@ -100,17 +107,37 @@ class AdminHolder extends Component {
 
   }
 
+  toggleDeleteModal = (id) => {
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal,
+      selectedAdmin: id
+    })
+  }
 
+  deleteAdmin = async (id) => {
+    if (id !== "") {
+      const deletedAdmin = await fetch('http://localhost:3000/admins/' + id, {
+        method: "DELETE",
+        credentials: 'include'
+      })
+      const admin = await deletedAdmin.json();
+      this.loadAdminList();
+      this.toggleDeleteModal();
+    }
+  }
 
   render() {
     return(
       <div className="admin-holder">
         {this.state.editingAdmin ? <EditAdmin adminName={this.state.adminName} email={this.state.email} isLeadAdmin={this.state.isLeadAdmin} editAdmin={this.editAdmin}/>
         : <div>{ this.state.addAdmin ? <AddAdmin addAdmin={this.addAdmin}/>
-          : <div>
-            <AdminShow adminName={this.state.adminName} email={this.state.email} toggleEditAdmin={this.toggleEditAdmin} isLeadAdmin={this.state.isLeadAdmin}/>
-            <AdminList admins={this.state.admins} toggleAddAdmin={this.toggleAddAdmin}/>
-          </div>
+          : <div> { this.state.showDeleteModal ? <DeleteModal toggleDeleteModal={this.toggleDeleteModal} deleteAdmin={this.deleteAdmin} selectedAdmin={this.state.selectedAdmin}/>
+            :<div>
+              <AdminShow adminName={this.state.adminName} email={this.state.email} toggleEditAdmin={this.toggleEditAdmin} isLeadAdmin={this.state.isLeadAdmin}/>
+              <AdminList admins={this.state.admins} toggleAddAdmin={this.toggleAddAdmin} toggleDeleteModal={this.toggleDeleteModal}/>
+            </div>
+          } </div>
+
 
           } </div>
 
