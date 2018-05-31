@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StudentInfo from './StudentInfo';
+import EditStudent from './EditStudent';
 
 class StudentShow extends Component {
   constructor() {
@@ -7,7 +8,8 @@ class StudentShow extends Component {
     this.state = {
       studentId: "",
       student: "",
-      group: "unassigned"
+      group: "unassigned",
+      editingStudent: false
     }
   }
 
@@ -54,11 +56,40 @@ class StudentShow extends Component {
 
   }
 
+  toggleEditStudent = () => {
+    this.setState({
+      editingStudent: !this.state.editingStudent
+    })
+  }
+
+  editStudent = async (studentName, email, password) => {
+    console.log('edit student is called')
+    const student = await fetch('http://localhost:3000/students/' + this.state.studentId, {
+      method: "PUT",
+      credentials: 'include',
+      body: JSON.stringify({
+        name: studentName,
+        email: email,
+        password: password
+      })
+    })
+    console.log(student, 'this is student')
+    const studentParsed = await student.json()
+    console.log(studentParsed, 'this is student parsed')
+    this.toggleEditStudent();
+    this.props.toggleViewStudent();
+  }
+
   render () {
     console.log(this.state, 'this is state from the render function in student show')
     return (
-        <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} password={this.state.student.password}/>
-      )
+      <div>
+        {this.state.editingStudent ? <div><EditStudent studentName={this.state.student.name} email={this.state.student.email} editStudent={this.editStudent}/> </div>
+          : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent}/>
+
+        }
+      </div>
+    )
   }
 }
 
