@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import StudentList from './StudentList'
+import StudentList from './StudentList';
+import AddStudent from './AddStudent';
 
 class StudentHolder extends Component {
   constructor() {
     super();
     this.state = {
-      students: []
+      students: [],
+      addingStudent: false
     }
   }
 
   componentDidMount() {
+    this.updateStudentList()
+  }
+
+  updateStudentList = () => {
     this.getStudents()
       .then((students) => {
         this.setState({students: students})
-        console.log(this.state, 'this is state in componentDidMount')
       })
       .catch((err) => {
         console.log(err)
@@ -30,11 +35,32 @@ class StudentHolder extends Component {
     return studentsArray
   }
 
+  toggleAddStudent = () => {
+    this.setState({
+      addingStudent: !this.state.addingStudent
+    })
+  }
+
+  addStudent = async (studentName, email, password) => {
+    // want to also add a drop down for them to select from available clients and fron available groups
+    await fetch('http://localhost:3000/students', {
+      method: "POST",
+      credentials: 'include',
+      body: JSON.stringify({
+        name: studentName,
+        email: email,
+        password: password
+      })
+    })
+    this.updateStudentList()
+    this.toggleAddStudent()
+  }
+
   render() {
     return(
       <div>
         <div className="admin-holder">
-          <StudentList students={this.state.students}/>
+          {this.state.addingStudent ? <AddStudent addStudent={this.addStudent}/> : <StudentList students={this.state.students} toggleAddStudent={this.toggleAddStudent}/>}
         </div>
         <div>
         </div>
