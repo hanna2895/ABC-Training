@@ -67,3 +67,23 @@ ul {
   width: 100%;
   display: flex;
 }
+
+/* -------- modal stuff ----------- */
+
+.Modal-Closed {
+	display: none;
+
+}
+
+.Modal-Open {
+	display: block;
+	background-color: purple;
+	text-align: center;
+	position: fixed;
+	/*left: 50;*/
+	height: 100px;
+	width: 30%;
+	margin-left: 35%;
+	box-shadow: 10px, 10px, 100px, black;
+	margin-top: -88px;
+}

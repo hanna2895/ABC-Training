@@ -29,7 +29,7 @@ class GroupShow extends Component {
   // maybe receives client name as prop?
   getGroupInfo = async () => {
     const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
-      method: "GET"
+      method: "GET",
       credentials: 'include'
     })
     const groupParsed = await group.json()

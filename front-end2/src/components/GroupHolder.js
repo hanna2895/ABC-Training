@@ -5,6 +5,7 @@ import AddGroup from './AddGroup';
 import AddClient from './AddClient';
 import EditClient from './EditClient';
 import GroupShow from './GroupShow';
+import DeleteModal from './DeleteModal';
 
 class GroupHolder extends Component {
   constructor() {
@@ -20,7 +21,8 @@ class GroupHolder extends Component {
       selectedClientId: "",
       selectedGroup: "",
       selectedGroupId: "",
-      unassignedStudents: []
+      unassignedStudents: [],
+      showDeleteModal: false
     }
   }
 
@@ -30,8 +32,8 @@ class GroupHolder extends Component {
 
   getClients = async () => {
     const clientsJson = await fetch('http://localhost:3000/clients', {
-      method: "GET"
-      // credentials: 'include'
+      method: "GET",
+      credentials: 'include'
     })
     const clients = await clientsJson.json();
     const clientsArray = clients.clients;
@@ -40,7 +42,7 @@ class GroupHolder extends Component {
 
   getGroupsByClient = async (id) => {
     const groupsJson = await fetch('http://localhost:3000/clients/' + id, {
-      method: "GET"
+      method: "GET",
       credentials: "include"
     })
 
@@ -65,7 +67,7 @@ class GroupHolder extends Component {
 
   getUnassignedStudents = async() => {
     const unassignedJson = await fetch('http://localhost:3000/unassigned', {
-      method: "GET"
+      method: "GET",
       credentials: 'include'
     })
     const students = await unassignedJson.json();
@@ -100,6 +102,7 @@ class GroupHolder extends Component {
       for (let i = 0; i < students.length; i++) {
         const student = await fetch('http://localhost:3000/students/' + students[i].id, {
           method: "PUT",
+          credentials: 'include',
           body: JSON.stringify({
             group_id: groupJson.group.id
           })
@@ -176,14 +179,34 @@ class GroupHolder extends Component {
       viewGroup: !this.state.viewGroup
     })
     console.log(this.state, 'this is state')
-    // this.showGroupShow()
   }
-  //
-  // showGroupShow = () => {
-  //   this.setState({
-  //
-  //   })
-  // }
+
+  toggleDeleteModal = () => {
+    console.log('toggleDeleteModal is being called')
+    this.setState({
+      showDeleteModal: !this.state.showDeleteModal
+    })
+  }
+
+  deleteClient = async (clientId) => {
+    if (clientId !== "") {
+      const client = await fetch('http://localhost:3000/clients/' + clientId, {
+        method: "DELETE",
+        credentials: 'include'
+      })
+
+      this.setState({
+        clients: this.state.clients.filter((client) => {
+          return client.id != clientId
+        })
+      })
+    } else {
+      // figure out how to set a message that says you must select a client before trying to delete, or gray out the button if it's blank
+    }
+    this.toggleDeleteModal();
+    this.getClients();
+
+  }
 
   render () {
     return (
@@ -193,9 +216,12 @@ class GroupHolder extends Component {
             this.state.addingClient ? <div className="admin-holder"> <AddClient addClient={this.addClient}/> </div>
             : <div> {this.state.editingClient ? <div className="admin-holder"> <EditClient selectedClient={this.state.selectedClient} editClient={this.editClient}/> </div>
               : <div >{this.state.viewGroup ? <div className="admin-holder"> <GroupShow selectedGroupId={this.state.selectedGroupId} selectedClient={this.state.selectedClient}/> </div>
-                : <div className="admin-holder">
-                  <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient}/>
-                  <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} toggleGroupShow={this.toggleGroupShow}/>
+                : <div> { this.state.showDeleteModal ? <div><DeleteModal isOpen={this.state.showDeleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteClient={this.deleteClient} selectedClient={this.state.selectedClientId}/></div>
+                  : <div className="admin-holder">
+                    <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient} toggleDeleteModal={this.toggleDeleteModal} />
+                    <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} toggleGroupShow={this.toggleGroupShow}/>
+                  </div>
+                }
                 </div>
 
               }</div>

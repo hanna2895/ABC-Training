@@ -23,7 +23,7 @@ class AdminHolder extends Component {
 
   getAdmins = async () => {
     const adminsJson = await fetch('http://localhost:3000/admins', {
-      method: "GET"
+      method: "GET",
       credentials: 'include'
     });
     const admins = await adminsJson.json();
