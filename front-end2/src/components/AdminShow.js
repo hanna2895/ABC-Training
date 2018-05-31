@@ -1,15 +1,17 @@
 import React from 'react';
 
-const AdminShow = (props) => {
+const AdminShow = ({ adminName, email, toggleEditAdmin, isLeadAdmin }) => {
   return (
     <div className="list-container">
       <h2> Admin Settings </h2>
       <div className="list-holder">
         <label> Name: </label>
-        <input placeholder="name"/><br />
+        {adminName} <br />
         <label> Email: </label>
-        <input placeholder="email" /> <br />
-        <button> Edit My Information </button>
+        {email}<br />
+        <label> Is Lead Admin: </label>
+        <input type="checkbox" checked={isLeadAdmin} readOnly/>
+        <button onClick={toggleEditAdmin}> Edit My Information </button>
       </div>
     </div>
   )
