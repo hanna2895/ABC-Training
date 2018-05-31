@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import StudentList from './StudentList';
 import AddStudent from './AddStudent';
+import StudentShow from './StudentShow';
 
 class StudentHolder extends Component {
   constructor() {
     super();
     this.state = {
       students: [],
-      addingStudent: false
+      addingStudent: false,
+      viewingStudent: false,
+      selectedStudentId: ""
     }
   }
 
@@ -56,14 +59,27 @@ class StudentHolder extends Component {
     this.toggleAddStudent()
   }
 
+  toggleViewStudent = (studentId) => {
+    this.setState({
+        viewingStudent: !this.state.viewingStudent,
+        selectedStudentId: studentId
+      })
+  }
+
   render() {
     return(
       <div>
         <div className="admin-holder">
-          {this.state.addingStudent ? <AddStudent addStudent={this.addStudent}/> : <StudentList students={this.state.students} toggleAddStudent={this.toggleAddStudent}/>}
+          {this.state.addingStudent ? <AddStudent addStudent={this.addStudent}/>
+          : <div> {this.state.viewingStudent ? <StudentShow selectedStudentId={this.state.selectedStudentId}/>
+            : <StudentList students={this.state.students} toggleAddStudent={this.toggleAddStudent} toggleViewStudent={this.toggleViewStudent}/>
+          } </div>
+        }
+
+
+
         </div>
-        <div>
-        </div>
+
       </div>
     )
   }
