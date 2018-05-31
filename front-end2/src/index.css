@@ -87,3 +87,14 @@ ul {
 	box-shadow: 10px, 10px, 100px, black;
 	margin-top: -88px;
 }
+
+/* ------ FORM STYLES ------------ */
+.newAdminForm {
+  text-align: left;
+  padding: 15px;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: auto;
+}

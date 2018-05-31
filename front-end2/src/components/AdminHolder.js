@@ -102,7 +102,7 @@ class AdminHolder extends Component {
     console.log(admin)
     const adminParsed = await admin.json();
     console.log(adminParsed)
-    this.getAdmins();
+    this.loadAdminList();
     this.toggleAddAdmin();
 
   }

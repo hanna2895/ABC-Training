@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Navbar from './components/Navbar';
 import ContentHolder from './components/ContentHolder';
 import PublicContent from './components/PublicContent';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 
 
