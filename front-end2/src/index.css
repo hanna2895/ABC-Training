@@ -7,10 +7,11 @@ body {
 
 /* ----------- NAV STYLES ------------- */
 .navbar {
-  width: 100vw;
-  border: 1px solid black;
+  width: 96vw;
   display: flex;
   justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .logo-div {
@@ -88,7 +89,10 @@ ul {
 .button-group {
   text-align: left;
   display: flex;
-  justify-content: space-around
+  justify-content: space-between;
+  width: 96vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .button-group > .wide-button {
@@ -157,7 +161,7 @@ button {
 
 .addStudentForm {
   width: 46vw;
-  height: 33vh;
+  height: 40vh;
   /* text-align: center; */
 }
 
@@ -167,4 +171,25 @@ button {
 
 .fixed {
   position: fixed !important;
+  margin-bottom: 150px;
+}
+
+.padding-top {
+  padding-top: 64px;
+}
+
+.more-height: {
+  height: 50vh;
+}
+
+.upload-holder {
+  width: 96vw;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 15px;
+}
+
+img {
+  width: 100vw;
 }

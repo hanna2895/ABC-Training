@@ -42,7 +42,7 @@ class LoginForm extends Component {
       <div className="loginForm">
         <TextField className="loginField" hintText="Email" type="text" name="email" onChange={this.handleInput}/>
         <TextField className="loginField" hintText="Password" type="password" name="password" onChange={this.handleInput}/>
-        <RaisedButton style={style} primary={true} onClick={this.handleSubmit}>Log In </RaisedButton>
+        <RaisedButton className="button wide-button" primary={true} onClick={this.handleSubmit}>Log In </RaisedButton>
          <br />
         {message}
       </div>
@@ -50,9 +50,7 @@ class LoginForm extends Component {
   }
 }
 
-const style = {
-  width: 260,
-}
+
 
 const mapStateToProps = function(state){
   return{

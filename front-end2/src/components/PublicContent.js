@@ -2,7 +2,7 @@ import React from 'react';
 
 const PublicContent = () => {
   return (
-    <p> this is what a non-logged in user will see </p>
+    <img src="http://www.kiplinger.com/kipimages/pages/17953.jpg" />
   )
 }
 

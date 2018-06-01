@@ -234,12 +234,12 @@ class GroupHolder extends Component {
   render () {
     return (
       <div>
-        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup} updateStudentGroupId={this.updateStudentGroupId}/> </div>
+        {this.state.addingGroup ? <div className="admin-holder" > <AddGroup selectedClient={this.state.selectedClient} unassignedStudents={this.state.unassignedStudents} addGroup={this.addGroup} updateStudentGroupId={this.updateStudentGroupId} toggleAddGroup={this.toggleAddGroup}/> </div>
           : <div> {
             this.state.addingClient ? <div className="admin-holder"> <AddClient addClient={this.addClient} toggleAddClient={this.toggleAddClient}/> </div>
             : <div> {this.state.editingClient ? <div className="admin-holder"> <EditClient selectedClient={this.state.selectedClient} editClient={this.editClient} toggleEditClient={this.toggleEditClient}/> </div>
-              : <div >{this.state.viewGroup ? <div className="admin-holder"> <GroupShow selectedGroupId={this.state.selectedGroupId} selectedClient={this.state.selectedClient} toggleDeleteModal={this.toggleDeleteModal} showDeleteModal={this.state.showDeleteModal} deleteGroup={this.deleteGroup} /> </div>
-                : <div> { this.state.showDeleteModal ? <div><DeleteModal isOpen={this.state.showDeleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteClient={this.deleteClient} selectedClient={this.state.selectedClientId}/></div>
+              : <div >{this.state.viewGroup ? <div className="admin-holder"> <GroupShow selectedGroupId={this.state.selectedGroupId} selectedClient={this.state.selectedClient} toggleDeleteModal={this.toggleDeleteModal} showDeleteModal={this.state.showDeleteModal} deleteGroup={this.deleteGroup} toggleAddGroup={this.toggleAddGroup}/> </div>
+                : <div> { this.state.showDeleteModal ? <div><DeleteModal showDeleteModal={this.state.showDeleteModal} toggleDeleteModal={this.toggleDeleteModal} deleteClient={this.deleteClient} selectedClient={this.state.selectedClientId}/></div>
                   : <div className="admin-holder">
                     <ClientList clients={this.state.clients} getGroups={this.getGroupsByClient} toggleAddClient={this.toggleAddClient} toggleEditClient={this.toggleEditClient} toggleDeleteModal={this.toggleDeleteModal} />
                     <GroupList groups={this.state.groups} selectedClient={this.selectedClient} toggleAddGroup={this.toggleAddGroup} toggleGroupShow={this.toggleGroupShow}/>

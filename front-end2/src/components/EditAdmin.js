@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
+import {Card, CardHeader} from 'material-ui/Card';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 
 class EditAdmin extends Component {
   constructor() {
@@ -35,18 +41,15 @@ class EditAdmin extends Component {
 
   render() {
     return (
-      <form>
-        <h2> Edit Admin Information </h2>
-        <label> Name: </label>
-        <input type="text" name="adminName" value={this.state.adminName} onChange={this.handleInput}/> <br />
-        <label> Email: </label>
-        <input type="text" name="email" value={this.state.email} onChange={this.handleInput}/> <br />
-        <label> Password: </label>
-        <input type="password" name="password" onChange={this.handleInput}/> <br />
-        <label> Lead Admin: </label>
-        <input type="checkbox" name="isLeadAdmin" checked={this.state.isLeadAdmin} readOnly={this.props.isLeadAdmin} onChange={this.handleInput}/><br />
-        <button onClick={this.handleSubmit}> Edit Information </button>
-      </form>
+      <Card>
+        <AppBar title="Edit Admin Information" showMenuIconButton={false} iconElementRight={<FlatButton label="Back" onClick={this.props.toggleEditAdmin} />}/>
+
+        <TextField className="add-margin" type="text" name="adminName" value={this.state.adminName} onChange={this.handleInput}/> <br />
+        <TextField className="add-margin" type="text" name="email" value={this.state.email} onChange={this.handleInput}/> <br />
+        <TextField hintText="New Password" className="add-margin" type="password" name="password" onChange={this.handleInput}/> <br />
+        <Checkbox className="add-margin" label="Is Lead Admin: " labelPosition="left" checked={this.state.isLeadAdmin} type="checkbox" readOnly={this.props.isLeadAdmin} name="isLeadAdmin" onCheck={this.handleInput}/> <br />
+        <RaisedButton className="add-margin button" primary={true} onClick={this.handleSubmit}> Edit Information </RaisedButton>
+      </Card>
     )
   }
 }

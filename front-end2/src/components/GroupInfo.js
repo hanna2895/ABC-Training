@@ -1,18 +1,36 @@
 import React from 'react';
+import {Card} from 'material-ui/Card';
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
+import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 const GroupInfo = ({ groupName, clientName, toggleEditGroup, toggleDeleteModal }) => {
   return (
-    <div className="list-container">
-      <h2> Group Details </h2>
-      <div className="list-holder">
-        <label> Group Name: </label>
-        {groupName} <br />
-        <label> Belongs to: </label>
-        {clientName} <br />
-        <button onClick={toggleEditGroup}> Edit This Group </button>
-        <button onClick={toggleDeleteModal}> Delete This Group </button>
-      </div>
-    </div>
+    <Card className="list-container">
+      <AppBar title="Group Details" showMenuIconButton={false}  />}/>
+      <Table>
+        <TableBody displayRowCheckbox={false}>
+          <TableRow >
+            <TableRowColumn> Group Name: </TableRowColumn>
+            <TableRowColumn> {groupName} </TableRowColumn>
+          </TableRow>
+          <TableRow>
+            <TableRowColumn> Belongs to: </TableRowColumn>
+            <TableRowColumn> {clientName} </TableRowColumn>
+          </TableRow>
+        </TableBody>
+      </Table>
+
+      <RaisedButton className="button wide-button" primary={true} onClick={toggleEditGroup}> Edit This Group </RaisedButton>
+      <RaisedButton className="button wide-button" primary={true} onClick={toggleDeleteModal}> Delete This Group </RaisedButton>
+
+    </Card>
     )
 }
 

@@ -3,6 +3,10 @@ import Dropzone from 'react-dropzone';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
 import {blue500} from 'material-ui/styles/colors';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardHeader} from 'material-ui/Card';
 
 class AddCourseMaterials extends Component {
   constructor()  {
@@ -47,12 +51,11 @@ class AddCourseMaterials extends Component {
   render() {
     console.log(this.state, 'this is state in AddCourseMaterials')
     return (
-      <div>
-        <MuiThemeProvider>
-          <div>
-            <h2>Selected Files</h2>
-          </div>
-        </MuiThemeProvider>
+      <div class="upload-holder">
+      <Card>
+
+        <AppBar title="Select Files to Upload" showMenuIconButton={false}/>
+
         <center>
           <div>
             You can upload upto {this.state.printcount} files at a time.
@@ -65,20 +68,20 @@ class AddCourseMaterials extends Component {
             Files to be printed are:
             {this.state.filesPreview}
           </div>
+          <RaisedButton primary={true} onClick={(e) => this.handleClick(e)}> Upload Files </RaisedButton>
+
         </center>
         <div>
           {this.state.printingmessage}
         </div>
-        <MuiThemeProvider>
-          <button style={style} onClick={(e) => this.handleClick(e)}> Upload Files </button>
-        </MuiThemeProvider>
-      </div>
+
+
+      </Card>
+    </div>
     )
   }
 }
 
-const style = {
-  margin: 15
-};
+
 
 export default AddCourseMaterials;

@@ -80,6 +80,7 @@ class StudentShow extends Component {
     console.log(studentParsed, 'this is student parsed')
     this.toggleEditStudent();
     this.props.toggleViewStudent();
+    this.props.updateStudentList();
   }
 
   toggleDeleteModal = () => {
@@ -111,9 +112,9 @@ class StudentShow extends Component {
     console.log(this.state, 'this is state from the render function in student show')
     return (
       <div>
-        {this.state.editingStudent ? <div><EditStudent studentName={this.state.student.name} email={this.state.student.email} editStudent={this.editStudent}/> </div>
-          : <div>{this.state.showDeleteModal ? <DeleteModal deleteStudent={this.deleteStudent} studentId={this.state.studentId} toggleDeleteModal={this.toggleDeleteModal}/>
-            : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent} toggleDeleteModal={this.toggleDeleteModal} toggleViewStudent={this.props.toggleViewStudent}/>
+        {this.state.editingStudent ? <div><EditStudent studentName={this.state.student.name} email={this.state.student.email} editStudent={this.editStudent} toggleEditStudent={this.toggleEditStudent}/> </div>
+          : <div>{this.state.showDeleteModal ? <DeleteModal deleteStudent={this.deleteStudent} studentId={this.state.studentId} toggleDeleteModal={this.toggleDeleteModal} showDeleteModal={this.state.showDeleteModal}/>
+            : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent} toggleDeleteModal={this.toggleDeleteModal} toggleViewStudent={this.props.toggleViewStudent} />
           } </div>
 
 

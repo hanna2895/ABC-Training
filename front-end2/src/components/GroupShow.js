@@ -10,7 +10,7 @@ class GroupShow extends Component {
     this.state = {
       students: [],
       groupId: "",
-      group: "",
+      group: "This client does not yet have any groups. Would you like to create one?",
       editingGroup: false
     }
   }
@@ -29,15 +29,20 @@ class GroupShow extends Component {
   // function to get the students by group id -> group show
   // maybe receives client name as prop?
   getGroupInfo = async () => {
-    const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
-      method: "GET",
-      credentials: 'include'
-    })
-    const groupParsed = await group.json()
-    this.setState({
-      group: groupParsed,
-      students: groupParsed.students
-    })
+    if (this.state.groupId) {
+      const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
+        method: "GET",
+        credentials: 'include'
+      })
+      const groupParsed = await group.json()
+      console.log(groupParsed)
+      this.setState({
+        group: groupParsed,
+        // groupName: groupParsed.group.name,
+        students: groupParsed.students
+      })
+    }
+
   }
 
   toggleEditGroup = () => {
@@ -63,14 +68,14 @@ class GroupShow extends Component {
   }
 
 
-  render() {
-
+  render() { // student list here is the list of students in the group. it is already styled.
+    console.log(this.state, 'this is state in groupshow')
     return (
       <div>
-        {this.state.editingGroup ? <div> <EditGroup groupName={this.state.group.group.name} editGroup={this.editGroup}/> </div>
+        {this.state.editingGroup ? <div> <EditGroup groupName={this.state.group.group.name} editGroup={this.editGroup} toggleEditGroup={this.toggleEditGroup}/> </div>
           : <div> { this.props.showDeleteModal ? <DeleteModal selectedGroup={this.state.groupId} deleteGroup={this.props.deleteGroup}/>
             : <div className="two-containers">
-            {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup} toggleDeleteModal={this.props.toggleDeleteModal}/>
+            {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup} toggleDeleteModal={this.props.toggleDeleteModal} toggleAddGroup={this.props.toggleAddGroup}/>
               : null }
             <StudentList students={this.state.students}/>
             </div>

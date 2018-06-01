@@ -20,7 +20,7 @@ class Navbar extends Component {
     return (
       <div className="navbar">
         <div className="logo-div">
-          <img className="logo" src={logo} alt="logo"/>
+          <img className="logo" src="https://www.jmfieldmarketing.com/wp-content/uploads/2014/06/Stark_Industries_logo-700x112.png" alt="logo"/>
         </div>
 
         <div className="nav-container">

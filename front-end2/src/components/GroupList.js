@@ -67,9 +67,9 @@ class GroupList extends Component {
     })
     return (
       <Card className="list-container">
-        <AppBar className="fixed" title="Groups" showMenuIconButton={false} iconElementRight={<FlatButton label="Add New Group" onClick={this.handleClick} />}/>
-        <Table onCellClick={this.handleSelect}>
-          <TableBody displayRowCheckbox={false}>
+        <AppBar title="Groups" showMenuIconButton={false} iconElementRight={<FlatButton label="Add New Group" onClick={this.handleClick} />}/>
+        <Table  onCellClick={this.handleSelect}>
+          <TableBody  displayRowCheckbox={false}>
 
             {ListOfGroups}
 
