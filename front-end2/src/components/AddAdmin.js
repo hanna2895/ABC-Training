@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader} from 'material-ui/Card';
 
 class AddAdmin extends Component {
   constructor() {
@@ -33,7 +31,6 @@ class AddAdmin extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
       <Card className="newAdminForm">
         <CardHeader> Add New Admin </CardHeader>
         <TextField hintText="Name" type="text" name="adminName" onChange={this.handleInput}/> <br />
@@ -42,7 +39,6 @@ class AddAdmin extends Component {
         <Checkbox label="Is Lead Admin: " labelPosition="left" type="checkbox" name="isLeadAdmin" onCheck={this.handleInput}/> <br />
         <RaisedButton className="button" primary={true} style={buttonStyle} onClick={this.handleSubmit}> Create Admin </RaisedButton>
       </Card>
-      </MuiThemeProvider>
     )
   }
 }

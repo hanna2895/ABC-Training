@@ -13,6 +13,7 @@ class App extends Component {
     const logged_in = this.props.logged_in.logged_in;
 
     return (
+      <MuiThemeProvider>
       <div className="App">
         <Navbar />
           { logged_in ?
@@ -21,6 +22,7 @@ class App extends Component {
           }
 
       </div>
+      </MuiThemeProvider>
     );
   }
 }

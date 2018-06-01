@@ -12,18 +12,19 @@ class MaterialHolder extends Component {
   addFile = async(fileArray) => {
     console.log('add file is being called')
     console.log(fileArray, 'these are the received viles')
-    const formData = new FormData();
-    formData.append('files', fileArray[0][0])
-    console.log(formData)
-
-    await fetch('http://localhost:3000/file/', {
-      method: "POST",
-      credentials: 'include',
-      body: JSON.stringify(formData)
-    })
-      .then(response => response.json())
-      .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));
+    // const formData = new FormData();
+    // formData.append('files', fileArray[0][0])
+    // // formData.
+    // console.log(formData)
+    //
+    // await fetch('http://localhost:3000/file/', {
+    //   method: "POST",
+    //   credentials: 'include',
+    //   body: JSON.stringify(formData)
+    // })
+    //   .then(response => response.json())
+    //   .catch(error => console.error('Error:', error))
+    //   .then(response => console.log('Success:', response));
   }
 
   render() {

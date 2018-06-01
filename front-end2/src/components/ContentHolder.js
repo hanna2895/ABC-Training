@@ -13,10 +13,10 @@ class ContentHolder extends Component {
   constructor() {
     super();
     this.state = {
-      showSettings: false,
+      showSettings: true,
       showGroups: false,
       showStudents: false,
-      showCourseMaterials: true,
+      showCourseMaterials: false,
       showStudentCourseMaterials: true,
       showStudentSettings: false
     }

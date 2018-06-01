@@ -3,23 +3,50 @@
 // import * as adminActions from '../actions/adminActions';
 // import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Card } from 'material-ui/Card';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
+
 
 class AdminList extends Component {
   constructor() {
     super();
     this.state = {
+      selected: "",
       selectedAdmin: "",
       selectedAdminId: ""
     }
   }
 
-  handleSelect = (e) => {
-    console.log(e.target.innerHTML, 'was clicked')
+  handleSelect = (selectedRows, index, value) => {
+    console.log('clicked')
+    console.log(selectedRows, 'selected')
+    console.log(value, 'value', value.currentTarget.id, 'currenttarget.id', value.currentTarget.innerHTML, 'name')
+    console.log(index, 'this is index')
+    // console.log(e.target, 'this is e.target')
     this.setState({
-      selectedAdmin: e.target.innerHTML,
-      selectedAdminId: e.target.id
+      selected: selectedRows,
+      // selectedAdmin: e.target.innerHTML,
+      selectedAdminId: value.currentTarget.id
     })
   }
+
+  toggleSelected = () => {
+
+  }
+
+
 
   handleClick = (e) => {
     e.preventDefault();
@@ -28,25 +55,28 @@ class AdminList extends Component {
 
   render() {
     const admins = this.props.admins
-    const ListOfAdmins = admins.map((admin, i) => {
+    const ListOfAdmins = admins.map((admin, index) => {
+      let id = admin.id
       return (
-          <li key={admin.id} id={admin.id} onClick={this.handleSelect}>Name: {admin.name}, Email: {admin.email} </li>
+        <TableRow key={index} id={admin.id} selected={this.state.selectedAdminId == id ? true : false}>
+          <TableRowColumn onClick={this.handleSelect} id={admin.id}>{admin.name}</TableRowColumn>
+          <TableRowColumn onClick={this.handleSelect} id={admin.id}>{admin.email}</TableRowColumn>
+        </TableRow>
       )
     })
     console.log(this.state, 'this is state')
 
     return (
 
-      <div className="list-container">
-        <h2> All Admins </h2>
-        <div className="list-holder">
-          <ul>
+      <Card className="list-container">
+        <AppBar showMenuIconButton={false} title="All Admins" iconElementRight={<FlatButton label="Add New Admin" onClick={this.props.toggleAddAdmin} />} />
+        <Table onCellClick={this.handleSelect}>
+          <TableBody displayRowCheckbox={false}>
             {ListOfAdmins}
-          </ul>
-        </div>
-        <button onClick={this.props.toggleAddAdmin}> Add New Admin </button>
-        <button onClick={this.handleClick}> Delete Selected Admin </button>
-      </div>
+          </TableBody>
+        </Table>
+        <RaisedButton className="button wide-button" primary={true} onClick={this.handleClick}> Delete Selected Admin </RaisedButton>
+      </Card>
     )
   }
 
@@ -121,6 +151,10 @@ export default AdminList;
 //   };
 // }
 //
+
+// <li key={admin.id} id={admin.id} onClick={this.handleSelect}>Name: {admin.name}, Email: {admin.email} </li>
+//
+
 // export default connect(
 //   mapStateToProps,
 //   mapDispatchToProps

@@ -1,41 +1,23 @@
 import React, { Component } from 'react';
 import logo from '../generic-logo.jpg';
 import { connect } from 'react-redux';
-// import * as actionCreators from './actionCreators';
 import LoginForm from './LoginForm';
 import * as userActions from '../actions/userActions';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 // this one will need redux to see if the user is logged in or nah
 // will have login form, rendered only if the user is not logged in
 
 class Navbar extends Component {
-  componentDidMount() {
-    // const { store } = this.context;
-    // this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
-  // adding component didmount so that this component has access to the global store
-  //
 
-  // shit from dan abramov video: do I need this? idk
-  // componentDidMount() {
-  //   const { store } = this.context;
-  //   this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  // }
   handleClick = (e) => {
     e.preventDefault();
     this.props.log_out();
   }
 
   render() {
-    // const { store } = this.context;
-    // const state = store.getState();
-    // console.log(state, 'this is state from navbar render')
-    console.log(this.props.logged_in)
+
     return (
-      <MuiThemeProvider>
       <div className="navbar">
         <div className="logo-div">
           <img className="logo" src={logo} alt="logo"/>
@@ -57,16 +39,12 @@ class Navbar extends Component {
             : <LoginForm logIn={this.props.log_in}/> }
         </div>
       </div>
-      </MuiThemeProvider>
 
     )
   }
 }
 
-// more shit from dan abramov vid
-// Navbar.contextTypes = {
-//   // store: React.PropTypes.object
-// }
+
 
 const long = {
   width: 130,

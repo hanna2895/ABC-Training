@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
@@ -41,15 +39,13 @@ class LoginForm extends Component {
   render() {
     const message = this.checkForMessage()
     return (
-      <MuiThemeProvider>
-        <div className="loginForm">
-          <TextField className="loginField" hintText="Email" type="text" name="email" onChange={this.handleInput}/>
-          <TextField className="loginField" hintText="Password" type="password" name="password" onChange={this.handleInput}/>
-          <RaisedButton style={style} primary={true} onClick={this.handleSubmit}>Log In </RaisedButton>
+      <div className="loginForm">
+        <TextField className="loginField" hintText="Email" type="text" name="email" onChange={this.handleInput}/>
+        <TextField className="loginField" hintText="Password" type="password" name="password" onChange={this.handleInput}/>
+        <RaisedButton style={style} primary={true} onClick={this.handleSubmit}>Log In </RaisedButton>
          <br />
         {message}
-        </div>
-      </MuiThemeProvider>
+      </div>
     )
   }
 }
