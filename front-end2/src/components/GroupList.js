@@ -1,4 +1,16 @@
 import React, { Component } from 'react';
+import { Card } from 'material-ui/Card';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class GroupList extends Component {
   constructor() {
@@ -9,17 +21,17 @@ class GroupList extends Component {
     }
   }
 
-  handleSelect = (e) => {
+  handleSelect = (selectedRows, index, value) => {
     // console.log(e.target, 'this is e.target')
     // const groupId = e.target.id;
     // console.log(groupId, 'groupId')
     // const group = e.target.innerHTML
     // console.log(group, 'group')
     // this.props.toggleGroupShow(group, groupId)
-    console.log(e.target.innerHTML, ' was clicked')
+    console.log(value.currentTarget)
+    const id = value.currentTarget.id
     this.setState({
-      selectedGroup: e.target.innerHTML,
-      selectedGroupId: e.target.id
+      selectedGroupId: id
     })
   }
 
@@ -43,22 +55,28 @@ class GroupList extends Component {
   }
 
   render() {
+    console.log(this.state, 'this is state')
+    console.log(this.props.groups)
     const ListOfGroups = this.props.groups.map((group, i) => {
+      let id = group.id
       return (
-        <li key={group.id} id={group.id} onClick={this.handleSelect}> {group.name} </li>
+        <TableRow key={i} id={group.id} selected={this.state.selectedGroupId == id ? true : false}>
+          <TableRowColumn id={group.id}>{group.name} </TableRowColumn>
+        </TableRow>
       )
     })
     return (
-      <div className="list-container">
-        <h2> Groups </h2>
-        <div className="list-holder">
-          <ul>
+      <Card className="list-container">
+        <AppBar className="fixed" title="Groups" showMenuIconButton={false} iconElementRight={<FlatButton label="Add New Group" onClick={this.handleClick} />}/>
+        <Table onCellClick={this.handleSelect}>
+          <TableBody displayRowCheckbox={false}>
+
             {ListOfGroups}
-          </ul>
-          <button onClick={this.handleViewClick}> View Group Details </button>
-          <button onClick={this.handleClick}> Add a New Group </button>
-        </div>
-      </div>
+
+          </TableBody>
+        </Table>
+        <RaisedButton className="button wide-button" primary={true} onClick={this.handleViewClick}> View Group Details </RaisedButton>
+      </Card>
     )
   }
 

@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import Checkbox from 'material-ui/Checkbox';
+import {Card, CardHeader} from 'material-ui/Card';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+
+
 
 class AddStudent extends Component {
   constructor() {
@@ -26,18 +34,15 @@ class AddStudent extends Component {
 
   render() {
     return (
-      <div className="list-container">
-        <h2> Add a New Student </h2>
-        <form>
-          <label> Name: </label>
-          <input type="text" name="name" value={this.state.name} onChange={this.handleInput} /> <br />
-          <label> Email: </label>
-          <input type="text" name="email" value={this.state.email} onChange={this.handleInput} /> <br />
-          <label> Password: </label>
-          <input type="password" name="password" value={this.state.password} onChange={this.handleInput} /> <br />
-          <button onClick={this.handleSubmit}> Add Student </button>
-        </form>
-      </div>
+      <Card className="addStudentForm">
+        <AppBar title="Add a New Student" showMenuIconButton={false} iconElementRight={<FlatButton label="Back" onClick={this.props.toggleAddStudent} />}/>
+
+          <TextField className="add-margin" hintText="Name" type="text" name="name" value={this.state.name} onChange={this.handleInput} /> <br />
+          <TextField className="add-margin" hintText="Email address" type="text" name="email" value={this.state.email} onChange={this.handleInput} /> <br />
+          <TextField className="add-margin" hintText="Password" type="password" name="password" value={this.state.password} onChange={this.handleInput} /> <br />
+          <RaisedButton className="button add-margin" primary={true} onClick={this.handleSubmit}> Add Student </RaisedButton>
+
+      </Card>
     )
   }
 }

@@ -78,8 +78,7 @@ class ContentHolder extends Component {
     return (
       <div>
         {is_admin() ?
-          <div className="content-holder">
-            <p> This is the content holder </p>
+          <div >
             <Nav2 clickStudents={this.clickStudents} clickSettings={this.clickSettings} clickGroups={this.clickGroups} clickCourseMaterials={this.clickCourseMaterials} />
 
             {this.state.showSettings ? <AdminHolder /> : null }

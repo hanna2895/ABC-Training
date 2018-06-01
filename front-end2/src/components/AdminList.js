@@ -59,8 +59,8 @@ class AdminList extends Component {
       let id = admin.id
       return (
         <TableRow key={index} id={admin.id} selected={this.state.selectedAdminId == id ? true : false}>
-          <TableRowColumn onClick={this.handleSelect} id={admin.id}>{admin.name}</TableRowColumn>
-          <TableRowColumn onClick={this.handleSelect} id={admin.id}>{admin.email}</TableRowColumn>
+          <TableRowColumn id={admin.id}>{admin.name}</TableRowColumn>
+          <TableRowColumn id={admin.id}>{admin.email}</TableRowColumn>
         </TableRow>
       )
     })

@@ -113,7 +113,7 @@ class StudentShow extends Component {
       <div>
         {this.state.editingStudent ? <div><EditStudent studentName={this.state.student.name} email={this.state.student.email} editStudent={this.editStudent}/> </div>
           : <div>{this.state.showDeleteModal ? <DeleteModal deleteStudent={this.deleteStudent} studentId={this.state.studentId} toggleDeleteModal={this.toggleDeleteModal}/>
-            : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent} toggleDeleteModal={this.toggleDeleteModal}/>
+            : <StudentInfo studentName={this.state.student.name} email={this.state.student.email} group={this.state.group} toggleEditStudent={this.toggleEditStudent} toggleDeleteModal={this.toggleDeleteModal} toggleViewStudent={this.props.toggleViewStudent}/>
           } </div>
 
 

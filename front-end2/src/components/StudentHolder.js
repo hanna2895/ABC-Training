@@ -60,17 +60,21 @@ class StudentHolder extends Component {
   }
 
   toggleViewStudent = (studentId) => {
-    this.setState({
+    if (studentId) {
+      this.setState({
         viewingStudent: !this.state.viewingStudent,
         selectedStudentId: studentId
       })
+    } else {
+      this.setState({viewingStudent: !this.state.viewingStudent})
+    }
   }
 
   render() {
     return(
-      <div>
-        <div className="admin-holder">
-          {this.state.addingStudent ? <AddStudent addStudent={this.addStudent}/>
+      <div className="admin-holder">
+
+          {this.state.addingStudent ? <AddStudent addStudent={this.addStudent} toggleAddStudent={this.toggleAddStudent}/>
           : <div> {this.state.viewingStudent ? <StudentShow selectedStudentId={this.state.selectedStudentId} toggleViewStudent={this.toggleViewStudent} updateStudentList={this.updateStudentList}/>
             : <StudentList students={this.state.students} toggleAddStudent={this.toggleAddStudent} toggleViewStudent={this.toggleViewStudent}/>
           } </div>
@@ -78,7 +82,7 @@ class StudentHolder extends Component {
 
 
 
-        </div>
+
 
       </div>
     )

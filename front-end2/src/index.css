@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Roboto, sans-serif;
+  background-color: #DFF7FA;
 }
 
 /* ----------- NAV STYLES ------------- */
@@ -33,6 +34,10 @@ body {
   margin-right: 1.5vw;
 }
 
+.button-holder > .button {
+  color: black !important;
+}
+
 .loginField {
   height: 30px !important;
   width: 100%;
@@ -54,14 +59,17 @@ ul {
 }
 
 .list-holder, .admin-holder {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 2%;
   height: 50vh;
 }
 
 .list-container {
   width: 100%;
+  height: auto;
   text-align: left;
+  max-height: 70vh;
+  overflow: scroll;
 }
 
 .admin-holder {
@@ -79,6 +87,12 @@ ul {
 
 .button-group {
   text-align: left;
+  display: flex;
+  justify-content: space-around
+}
+
+.button-group > .wide-button {
+  margin-left: 0;
 }
 
 .two-containers {
@@ -95,15 +109,14 @@ ul {
 
 .Modal-Open {
 	display: block;
-	background-color: purple;
+	background-color: #005E6A;
 	text-align: center;
 	position: fixed;
 	/*left: 50;*/
 	height: 100px;
-	width: 30%;
-	margin-left: 35%;
+	width: 40%;
+	margin-left: -16vw;
 	box-shadow: 10px, 10px, 100px, black;
-	margin-top: -88px;
 }
 
 /* ------ FORM STYLES ------------ */
@@ -120,7 +133,7 @@ ul {
 }
 
 button {
-  color: white;
+  color: white !important;
 }
 
 .weird-button {
@@ -128,7 +141,7 @@ button {
 }
 
 .wide-button {
-  width: 250px;
+  width: 230px;
   color: white !important;
   margin-left: 15px;
 }
@@ -136,4 +149,22 @@ button {
 .show-text {
   margin: 15;
   line-height: 3;
+}
+
+.add-margin {
+  margin-left: 15px;
+}
+
+.addStudentForm {
+  width: 46vw;
+  height: 33vh;
+  /* text-align: center; */
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fixed {
+  position: fixed !important;
 }

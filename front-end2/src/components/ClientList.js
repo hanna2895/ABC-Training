@@ -1,32 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Card } from 'material-ui/Card';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
+import RaisedButton from 'material-ui/RaisedButton';
 
-const ClientList = ({ clients, getGroups, toggleAddClient, toggleEditClient, toggleDeleteModal }) => {
+class ClientList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedClientId: ""
+    }
+  }
 
-  const handleClick = (e) => {
-    const id = e.currentTarget.id
-    getGroups(id)
+  handleClick = (selectedRows, index, value) => {
+    const id = value.currentTarget.id
+
+    this.setState({
+      selectedClientId: id
+    })
+
+    this.props.getGroups(id)
     // maybe make that shit change color when it's clicked
   }
 
-  const ListOfClients = clients.map((client, i) => {
-    return (
-      <li key={client.id} id={client.id} onClick={handleClick}> {client.name} </li>
-    )
-  })
+  render() {
+    const ListOfClients = this.props.clients.map((client, i) => {
+      let id = client.id
+      return (
+        <TableRow key={i} id={client.id} selected={this.state.selectedClientId == id ? true : false} >
+          <TableRowColumn id={client.id}> {client.name} </TableRowColumn>
+        </TableRow>
+      )
+    })
 
-  return (
-    <div className="list-container">
-      <h2> Clients </h2>
-      <div className="list-holder">
-        <ul>
-          {ListOfClients}
-        </ul>
-        <button onClick={toggleEditClient}> Edit this Client </button>
-        <button onClick={toggleAddClient}> Add a New Client </button>
-        <button onClick={toggleDeleteModal}> Delete this Client </button>
-      </div>
-    </div>
-  )
+    return (
+      <Card className="list-container">
+        <AppBar title="Clients" showMenuIconButton={false} iconElementRight={<FlatButton label="Add New Client" onClick={this.props.toggleAddClient} />} />
+        <Table onCellClick={this.handleClick}>
+          <TableBody displayRowCheckbox={false}>
+            {ListOfClients}
+          </TableBody>
+        </Table>
+
+          <RaisedButton className="button wide-button" primary={true} onClick={this.props.toggleEditClient}> Edit this Client </RaisedButton>
+          <RaisedButton className="button wide-button" primary={true} onClick={this.props.toggleDeleteModal}> Delete this Client </RaisedButton>
+
+      </Card>
+    )
+  }
+
 }
 
 export default ClientList;
