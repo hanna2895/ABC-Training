@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import StudentInfo from './StudentInfo';
 import EditStudent from './EditStudent';
 import DeleteModal from './DeleteModal';
+import { connect } from 'react-redux';
+
 
 class StudentShow extends Component {
   constructor() {
@@ -16,10 +18,18 @@ class StudentShow extends Component {
   }
 
   componentWillMount = () => {
-    this.setState({
-      studentId: this.props.selectedStudentId
-    })
-    console.log(this.state,' this is state from studentshow')
+    // if the admin is logged in and has selected a student, do This
+    if (this.props.logged_in.user_type === "admin") {
+      this.setState({
+        studentId: this.props.selectedStudentId
+      })
+    }
+    // else check the store for the student's id and use that
+    else if (this.props.logged_in.user_type === "student") {
+      this.setState({
+        studentId: this.props.logged_in.user_id
+      })
+    }
   }
 
   componentDidMount = () => {
@@ -35,7 +45,7 @@ class StudentShow extends Component {
 
     const studentParsed = await student.json();
     console.log(studentParsed)
-    if (studentParsed.student.group_id) {
+    if (studentParsed.student.group_id !== null) {
       this.getStudentsGroup(studentParsed.student.group_id)
     }
 
@@ -109,7 +119,6 @@ class StudentShow extends Component {
   }
 
   render () {
-    console.log(this.state, 'this is state from the render function in student show')
     return (
       <div>
         {this.state.editingStudent ? <div><EditStudent studentName={this.state.student.name} email={this.state.student.email} editStudent={this.editStudent} toggleEditStudent={this.toggleEditStudent}/> </div>
@@ -125,4 +134,11 @@ class StudentShow extends Component {
 }
 
 
-export default StudentShow;
+const mapStateToProps = function(state){
+  return{
+    logged_in: state.logged_in
+  }
+}
+
+
+export default connect(mapStateToProps)(StudentShow);

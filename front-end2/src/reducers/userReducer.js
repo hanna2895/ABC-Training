@@ -2,10 +2,8 @@ import initialState from './initialState';
 import { STUDENT_LOGGED, ADMIN_LOGGED, LOGIN_FAILED, LOGGED_OUT } from '../actions/actionTypes';
 
 export default function user_type(state = initialState, action) {
-  console.log(action, 'this is action from userreducer')
   switch(action.type) {
     case STUDENT_LOGGED:
-      console.log('checkLoginSuccess called')
       return {
         ...state,
         logged_in: true,

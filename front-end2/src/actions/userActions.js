@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 
 export function checkUserType(json) {
-  console.log(json, 'this is json from useractions')
   if (json.user_type === "student")
     return {type: types.STUDENT_LOGGED, user_id: json.user_id, user_name: json.user_name}
   else if (json.user_type === "admin") {
@@ -37,6 +36,5 @@ export function clickLogOut() {
 }
 
 export function logOut(json) {
-  console.log(json, 'this is json from logOut')
   return {type: types.LOGGED_OUT}
 }

@@ -61,7 +61,11 @@ class ContentHolder extends Component {
 
   toggleStudentView = () => {
     this.setState({
-      showStudentCourseMaterials: !this.state.showStudentCourseMaterials
+      showStudentCourseMaterials: !this.state.showStudentCourseMaterials,
+      showSettings: false,
+      showGroups: false,
+      showStudents: false,
+      showCourseMaterials: false
     })
   }
 
