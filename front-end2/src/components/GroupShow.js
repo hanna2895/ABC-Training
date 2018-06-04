@@ -36,9 +36,11 @@ class GroupShow extends Component {
       })
       const groupParsed = await group.json()
       console.log(groupParsed)
+      const groupName = groupParsed.group.name
+      console.log(groupName)
       this.setState({
         group: groupParsed,
-        // groupName: groupParsed.group.name,
+        groupName: groupName,
         students: groupParsed.students
       })
     }
@@ -73,9 +75,9 @@ class GroupShow extends Component {
     return (
       <div>
         {this.state.editingGroup ? <div> <EditGroup groupName={this.state.group.group.name} editGroup={this.editGroup} toggleEditGroup={this.toggleEditGroup}/> </div>
-          : <div> { this.props.showDeleteModal ? <DeleteModal selectedGroup={this.state.groupId} deleteGroup={this.props.deleteGroup}/>
+          : <div> { this.props.showDeleteModal ? <DeleteModal selectedGroup={this.state.groupId} deleteGroup={this.props.deleteGroup} toggleDeleteModal={this.props.toggleDeleteModal} showDeleteModal={this.props.showDeleteModal}/>
             : <div className="two-containers">
-            {this.state.group !== "" ? <GroupInfo groupName={this.state.group.group.name} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup} toggleDeleteModal={this.props.toggleDeleteModal} toggleAddGroup={this.props.toggleAddGroup}/>
+            {this.state.group !== "" ? <GroupInfo groupName={this.state.groupName} clientName={this.props.selectedClient} toggleEditGroup={this.toggleEditGroup} toggleDeleteModal={this.props.toggleDeleteModal} toggleAddGroup={this.props.toggleAddGroup}/>
               : null }
             <StudentList students={this.state.students}/>
             </div>

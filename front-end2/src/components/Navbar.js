@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../generic-logo.jpg';
 import { connect } from 'react-redux';
 import LoginForm from './LoginForm';
 import * as userActions from '../actions/userActions';

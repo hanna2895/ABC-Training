@@ -9,8 +9,6 @@ import FlatButton from 'material-ui/FlatButton';
 import {
   Table,
   TableBody,
-  TableHeader,
-  TableHeaderColumn,
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';

@@ -67,7 +67,7 @@ class AdminHolder extends Component {
 
   editAdmin = async (adminName, email, password) => {
     console.log('editadmin clicked')
-    const admin = await fetch('http://localhost:3000/admins/' + this.props.logged_in.user_id, {
+    await fetch('http://localhost:3000/admins/' + this.props.logged_in.user_id, {
       method: "PUT",
       credentials: 'include',
       body: JSON.stringify({
@@ -76,7 +76,6 @@ class AdminHolder extends Component {
         password: password
       })
     })
-    const adminParsed = await admin.json()
     this.toggleEditAdmin();
     this.showLoggedAdmin();
   }
@@ -116,11 +115,10 @@ class AdminHolder extends Component {
 
   deleteAdmin = async (id) => {
     if (id !== "") {
-      const deletedAdmin = await fetch('http://localhost:3000/admins/' + id, {
+      await fetch('http://localhost:3000/admins/' + id, {
         method: "DELETE",
         credentials: 'include'
       })
-      const admin = await deletedAdmin.json();
       this.loadAdminList();
       this.toggleDeleteModal();
     }

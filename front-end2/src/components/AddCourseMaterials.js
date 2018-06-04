@@ -4,9 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
 import {blue500} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card} from 'material-ui/Card';
 
 class AddCourseMaterials extends Component {
   constructor()  {

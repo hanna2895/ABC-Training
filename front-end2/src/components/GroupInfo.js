@@ -8,9 +8,10 @@ import {
 } from 'material-ui/Table';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 
 const GroupInfo = ({ groupName, clientName, toggleEditGroup, toggleDeleteModal }) => {
+
+  // console.log(group)
   return (
     <Card className="list-container">
       <AppBar title="Group Details" showMenuIconButton={false}  />}/>
