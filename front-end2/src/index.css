@@ -13,6 +13,7 @@ body {
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
+  height: 15vh;
 }
 
 .logo-div {
@@ -29,11 +30,10 @@ body {
 .nav-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
 }
 
 .button-holder {
-  margin-top: 2.5vh;
+  margin-top: 3vh;
 }
 
 .button-holder > .button {
@@ -46,16 +46,29 @@ body {
 .loginField {
   height: 30px !important;
   width: 100%;
+  padding-top: 25px;
+  margin-left: 15px;
 }
 
 .loginForm {
   display: flex;
   flex-direction: column;
-  align-self: flex-end;
-  margin-right: 1.5vw;
-  margin-top: 2vh;
+  /* align-self: flex-end; */
+  margin-right: 15vw;
+  margin-left: auto;
+  margin-top: 20vh;
   margin-bottom: 1vh;
-  z-index: 1000;
+  z-index: 1;
+  position: relative;
+  background-color: white;
+  width: 20vw;
+  min-width: 280px;
+  height: 25vh;
+}
+
+.login-button {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ------------list styles ------------------ */
@@ -206,11 +219,26 @@ img {
 }
 
 .image {
-
   width: 95vw;
-  height: 85vh;
+  height: 80vh;
   margin-left: 2.5vw;
-  margin-right: 2.5vw;
+  margin-right: 3vw;
   background-size: cover;
-  z-index: -999;
+  z-index: 0;
+  position: absolute;
+}
+
+.homepage {
+  display: flex;
+}
+
+.home-text {
+  z-index: 1;
+  color: black;
+  font-family: 'Song Myung', serif;
+  margin-left: 20vw;
+  margin-top: 20vh;
+  font-size: 55px;
+  font-weight: bold;
+  width: 30vw;
 }
