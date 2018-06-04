@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FontIcon from 'material-ui/FontIcon';
 import {blue500} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
@@ -27,9 +26,9 @@ class AddCourseMaterials extends Component {
 
         filesPreview.push(<div key={i}>
           {filesToBeSent[i][0].name}
-          <MuiThemeProvider>
+
             <a href="#"><FontIcon className="material-icons customstyle" color={blue500} styles={{top:10,}}>clear</FontIcon></a>
-          </MuiThemeProvider>
+
         </div>
 
         )

@@ -1,9 +1,19 @@
 import React from 'react';
+import LoginForm from './LoginForm';
+import Background from '../background.jpg';
 
-const PublicContent = () => {
+
+const PublicContent = ({ showLoginForm }) => {
   return (
-    <img src="http://www.kiplinger.com/kipimages/pages/17953.jpg" alt="Generic business people"/>
+    <div>
+      <div style={style} className="image"/>
+      { showLoginForm ? <LoginForm /> : null}
+    </div>
   )
 }
 
 export default PublicContent;
+
+const style = {
+  backgroundImage: `url(${ Background } )`
+}

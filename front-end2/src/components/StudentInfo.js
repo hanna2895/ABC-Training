@@ -13,7 +13,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const StudentInfo = ({studentName, email, group, password, toggleEditStudent, toggleDeleteModal, toggleViewStudent }) => {
   return (
-    <Card>
+    <Card className="upload-holder">
       <AppBar showMenuIconButton={false} title="Student Information" iconElementRight={<div><FlatButton label="Edit This Student" onClick={toggleEditStudent} /> <FlatButton label="Back" onClick={toggleViewStudent} /></div>}/>
       <Table>
         <TableBody displayRowCheckbox={false}>

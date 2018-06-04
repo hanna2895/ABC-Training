@@ -1,8 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Roboto, sans-serif;
-  background-color: #DFF7FA;
+  /* font-family: Roboto, sans-serif; */
+  font-family: 'Play', sans-serif;
+  background-color: white;
 }
 
 /* ----------- NAV STYLES ------------- */
@@ -18,6 +19,7 @@ body {
   max-width: 30vw;
   /* width: 30vw; */
   height: auto;
+  letter-spacing: 0.8em;
 }
 
 .logo {
@@ -31,12 +33,14 @@ body {
 }
 
 .button-holder {
-  margin-top: 1vh;
-  margin-right: 1.5vw;
+  margin-top: 2.5vh;
 }
 
 .button-holder > .button {
+  font-family: 'Play', sans-serif;
+  letter-spacing: 0.2em;
   color: black !important;
+  width: 130px;
 }
 
 .loginField {
@@ -51,6 +55,7 @@ body {
   margin-right: 1.5vw;
   margin-top: 2vh;
   margin-bottom: 1vh;
+  z-index: 1000;
 }
 
 /* ------------list styles ------------------ */
@@ -191,5 +196,21 @@ button {
 }
 
 img {
-  width: 100vw;
+  width: 95vw;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+}
+
+.main-image {
+  z-index: -999;
+}
+
+.image {
+
+  width: 95vw;
+  height: 85vh;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+  background-size: cover;
+  z-index: -999;
 }

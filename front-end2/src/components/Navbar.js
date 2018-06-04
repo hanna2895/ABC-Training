@@ -19,23 +19,24 @@ class Navbar extends Component {
     return (
       <div className="navbar">
         <div className="logo-div">
-          <img className="logo" src="https://www.jmfieldmarketing.com/wp-content/uploads/2014/06/Stark_Industries_logo-700x112.png" alt="logo"/>
+          <h1>| ABC Training |</h1>
         </div>
 
         <div className="nav-container">
 
           <div className="button-holder">
-              <FlatButton className="button button-primary">Home</FlatButton>
-              <FlatButton className="button button-primary" style={long}>Core Services</FlatButton>
-              <FlatButton className="button button-primary">Our Team</FlatButton>
-              <FlatButton className="button button-primary">News</FlatButton>
-              <FlatButton className="button button-primary">Contact Us</FlatButton>
+              <FlatButton className="button button-primary">HOME</FlatButton>
+              <FlatButton className="button button-primary" style={long}>CORE SERVICES</FlatButton>
+              <FlatButton className="button button-primary">OUR TEAM</FlatButton>
+              <FlatButton className="button button-primary">NEWS</FlatButton>
+              <FlatButton className="button button-primary">CONTACT US</FlatButton>
+              <FlatButton onClick={this.props.toggleLoginForm} className="button button-primary">LOG IN</FlatButton>
           </div>
           {this.props.logged_in.logged_in ? <div className="loginForm">
               <p> You are logged in as {this.props.logged_in.user_name} </p>
               <RaisedButton primary={true} label="Log Out" onClick={this.handleClick}></RaisedButton>
             </div>
-            : <LoginForm logIn={this.props.log_in}/> }
+            : null }
         </div>
       </div>
 

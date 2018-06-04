@@ -9,16 +9,28 @@ import './App.css';
 
 // changed logged in to student view in this ternary
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showLoginForm: false
+    }
+  }
+
+  toggleLoginForm = () => {
+    this.setState({
+      showLoginForm: !this.state.showLoginForm
+    })
+  }
   render() {
     const logged_in = this.props.logged_in.logged_in;
 
     return (
       <MuiThemeProvider>
       <div className="App">
-        <Navbar />
+        <Navbar toggleLoginForm={this.toggleLoginForm} />
           { logged_in ?
             <ContentHolder />
-            : <PublicContent />
+            : <PublicContent showLoginForm={this.state.showLoginForm}/>
           }
 
       </div>
