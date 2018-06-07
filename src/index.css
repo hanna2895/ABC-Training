@@ -14,6 +14,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   height: 20vh;
+  position: sticky;
 }
 
 .logo-div {
@@ -223,6 +224,7 @@ button {
   padding-bottom: 15px;
 }
 
+/* ------------- HOMEPAGE STYLES ---------------------- */
 img {
   width: 95vw;
   margin-left: 2.5vw;
@@ -235,7 +237,7 @@ img {
 
 .image {
   width: 95vw;
-  height: 80vh;
+  height: 75vh;
   margin-left: 2.5vw;
   margin-right: 3vw;
   background-size: cover;
@@ -245,6 +247,7 @@ img {
 
 .homepage {
   display: flex;
+  height: 90vh;
 }
 
 .home-text {
@@ -256,4 +259,53 @@ img {
   font-size: 55px;
   font-weight: bold;
   width: 30vw;
+}
+
+.home-holder {
+  display: block;
+}
+
+.color-block {
+  background-color: #eff6ff;
+  width: 65vw;
+  height: 50vh;
+  margin-left: 2.5vw;
+  position: absolute;
+  z-index: 0;
+}
+
+.color-block > h1 {
+  margin-left: 20vw;
+  font-size: 50px;
+}
+
+.color-block > p {
+  width: 40vw;
+  margin-left: 5vw;
+}
+
+.small-image {
+  width: 45vw;
+  margin-right: 2.5vw;
+  margin-top: 5vh;
+  height: 40vh;
+  background-size: cover;
+  z-index: 1;
+  position: relative;
+  margin-left: auto;
+}
+
+.holder {
+  display: flex;
+  height: 50vh;
+}
+
+.wide {
+  width: 95vw;
+  margin-top: 10vh;
+}
+
+.wide > h1 {
+  text-align: center;
+  margin-left: 0px;
 }
