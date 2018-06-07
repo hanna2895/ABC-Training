@@ -1,0 +1,19 @@
+{
+  "name": "project4-front-end",
+  "version": "1.0.0",
+  "description": "ABC Training Company Web Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanna2895/ABC-Training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanna2895/ABC-Training/issues"
+  },
+  "homepage": "https://github.com/hanna2895/ABC-Training#readme"
+}
