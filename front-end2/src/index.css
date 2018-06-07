@@ -13,7 +13,7 @@ body {
   justify-content: space-between;
   margin-left: auto;
   margin-right: auto;
-  height: 15vh;
+  height: 20vh;
 }
 
 .logo-div {
@@ -69,6 +69,21 @@ body {
 .login-button {
   margin-left: auto;
   margin-right: auto;
+}
+
+.logout {
+  width: 100%;
+  text-align: right;
+  margin-top: 3vh;
+}
+
+.normal-height-button {
+  height: 36px;
+  margin-left: 5px;
+}
+
+.inline {
+  display: inline;
 }
 
 /* ------------list styles ------------------ */

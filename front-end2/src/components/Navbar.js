@@ -10,6 +10,7 @@ class Navbar extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
+    this.props.toggleLoginForm();
     this.props.log_out();
   }
 
@@ -23,6 +24,7 @@ class Navbar extends Component {
 
         <div className="nav-container">
 
+
           <div className="button-holder">
               <FlatButton className="button button-primary">HOME</FlatButton>
               <FlatButton className="button button-primary" style={long}>CORE SERVICES</FlatButton>
@@ -31,11 +33,13 @@ class Navbar extends Component {
               <FlatButton className="button button-primary">CONTACT US</FlatButton>
               <FlatButton onClick={this.props.toggleLoginForm} className="button button-primary">LOG IN</FlatButton>
           </div>
-          {this.props.logged_in.logged_in ? <div className="loginForm">
-              <p> You are logged in as {this.props.logged_in.user_name} </p>
-              <RaisedButton primary={true} label="Log Out" onClick={this.handleClick}></RaisedButton>
-            </div>
-            : null }
+
+          {this.props.logged_in.logged_in ? <div className="logout">
+            <p className="inline"> You are logged in as {this.props.logged_in.user_name} </p>
+            <RaisedButton className="normal-height-button" primary={true} label="Log Out" onClick={this.handleClick}></RaisedButton>
+          </div>
+          : null }
+
         </div>
       </div>
 
