@@ -29,7 +29,7 @@ class StudentHolder extends Component {
   }
 
   getStudents = async () => {
-    const studentsJson = await fetch('http://localhost:3000/students', {
+    const studentsJson = await fetch('https://protected-reaches-40551.herokuapp.com/students', {
       method: "GET",
       credentials: 'include'
     });
@@ -46,7 +46,7 @@ class StudentHolder extends Component {
 
   addStudent = async (studentName, email, password) => {
     // want to also add a drop down for them to select from available clients and fron available groups
-    await fetch('http://localhost:3000/students', {
+    await fetch('https://protected-reaches-40551.herokuapp.com/students', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify({

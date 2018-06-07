@@ -31,7 +31,7 @@ class GroupHolder extends Component {
   }
 
   getClients = async () => {
-    const clientsJson = await fetch('http://localhost:3000/clients', {
+    const clientsJson = await fetch('https://protected-reaches-40551.herokuapp.com/clients', {
       method: "GET",
       credentials: 'include'
     })
@@ -41,7 +41,7 @@ class GroupHolder extends Component {
   }
 
   getGroupsByClient = async (id) => {
-    const groupsJson = await fetch('http://localhost:3000/clients/' + id, {
+    const groupsJson = await fetch('https://protected-reaches-40551.herokuapp.com/clients/' + id, {
       method: "GET",
       credentials: "include"
     })
@@ -66,7 +66,7 @@ class GroupHolder extends Component {
   }
 
   getUnassignedStudents = async() => {
-    const unassignedJson = await fetch('http://localhost:3000/unassigned', {
+    const unassignedJson = await fetch('https://protected-reaches-40551.herokuapp.com/unassigned', {
       method: "GET",
       credentials: 'include'
     })
@@ -78,7 +78,7 @@ class GroupHolder extends Component {
   }
 
   addGroup = async (groupName, selectedStudents) => {
-    const group = await fetch('http://localhost:3000/groups', {
+    const group = await fetch('https://protected-reaches-40551.herokuapp.com/groups', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify({
@@ -100,7 +100,7 @@ class GroupHolder extends Component {
       return;
     } else {
       for (let i = 0; i < students.length; i++) {
-        const student = await fetch('http://localhost:3000/students/' + students[i].id, {
+        const student = await fetch('https://protected-reaches-40551.herokuapp.com/students/' + students[i].id, {
           method: "PUT",
           credentials: 'include',
           body: JSON.stringify({
@@ -132,7 +132,7 @@ class GroupHolder extends Component {
   }
 
   addClient = async (clientName) => {
-    const client = await fetch('http://localhost:3000/clients', {
+    const client = await fetch('https://protected-reaches-40551.herokuapp.com/clients', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify({
@@ -157,7 +157,7 @@ class GroupHolder extends Component {
   }
 
   editClient = async (clientName) => {
-    const client = await fetch('http://localhost:3000/clients/' + this.state.selectedClientId, {
+    const client = await fetch('https://protected-reaches-40551.herokuapp.com/clients/' + this.state.selectedClientId, {
       method: "PUT",
       credentials: 'include',
       body: JSON.stringify({
@@ -192,7 +192,7 @@ class GroupHolder extends Component {
 
   deleteClient = async (clientId) => {
     if (clientId !== "") {
-      await fetch('http://localhost:3000/clients/' + clientId, {
+      await fetch('https://protected-reaches-40551.herokuapp.com/clients/' + clientId, {
         method: "DELETE",
         credentials: 'include'
       })
@@ -211,7 +211,7 @@ class GroupHolder extends Component {
 
   deleteGroup = async (groupId) => {
     if (groupId !== "") {
-      await fetch('http://localhost:3000/groups/' + groupId, {
+      await fetch('https://protected-reaches-40551.herokuapp.com/groups/' + groupId, {
         method: "DELETE",
         credentials: 'include'
       })

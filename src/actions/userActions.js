@@ -12,7 +12,7 @@ export function checkUserType(json) {
 
 export function logIn(email, password) {
   return dispatch => {
-    return fetch('http://localhost:3000/login', {
+    return fetch('https://protected-reaches-40551.herokuapp.com/login', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify({
@@ -27,7 +27,7 @@ export function logIn(email, password) {
 
 export function clickLogOut() {
   return dispatch => {
-    return fetch('http://localhost:3000/logout', {
+    return fetch('https://protected-reaches-40551.herokuapp.com/logout', {
       method: "GET"
     })
     .then(response => response.json())

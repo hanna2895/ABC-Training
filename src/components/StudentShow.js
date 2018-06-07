@@ -38,7 +38,7 @@ class StudentShow extends Component {
   }
 
   getStudentInfo = async () => {
-    const student = await fetch('http://localhost:3000/students/' + this.state.studentId, {
+    const student = await fetch('https://protected-reaches-40551.herokuapp.com/students/' + this.state.studentId, {
       method: "GET",
       credentials: 'include'
     })
@@ -55,7 +55,7 @@ class StudentShow extends Component {
   }
 
   getStudentsGroup = async (id) => {
-    const group = await fetch('http://localhost:3000/groups/' + id, {
+    const group = await fetch('https://protected-reaches-40551.herokuapp.com/groups/' + id, {
       method: "GET",
       credentials: 'include'
     })
@@ -76,7 +76,7 @@ class StudentShow extends Component {
 
   editStudent = async (studentName, email, password) => {
     console.log('edit student is called')
-    const student = await fetch('http://localhost:3000/students/' + this.state.studentId, {
+    const student = await fetch('https://protected-reaches-40551.herokuapp.com/students/' + this.state.studentId, {
       method: "PUT",
       credentials: 'include',
       body: JSON.stringify({
@@ -105,7 +105,7 @@ class StudentShow extends Component {
   deleteStudent = async (studentId) => {
     console.log('delete student is being called')
     if (studentId !== "") {
-      await fetch('http://localhost:3000/students/' + studentId, {
+      await fetch('https://protected-reaches-40551.herokuapp.com/students/' + studentId, {
         method: "DELETE",
         credentials: 'include'
       })

@@ -37,7 +37,7 @@ class AdminHolder extends Component {
   }
 
   getAdmins = async () => {
-    const adminsJson = await fetch('http://localhost:3000/admins', {
+    const adminsJson = await fetch('https://protected-reaches-40551.herokuapp.com/admins', {
       method: "GET",
       credentials: 'include'
     });
@@ -47,7 +47,7 @@ class AdminHolder extends Component {
   }
 
   showLoggedAdmin = async () => {
-    const adminJson = await fetch('http://localhost:3000/admins/' + this.props.logged_in.user_id, {
+    const adminJson = await fetch('https://protected-reaches-40551.herokuapp.com/admins/' + this.props.logged_in.user_id, {
       method: "GET",
       credentials: 'include'
     })
@@ -67,7 +67,7 @@ class AdminHolder extends Component {
 
   editAdmin = async (adminName, email, password) => {
     console.log('editadmin clicked')
-    await fetch('http://localhost:3000/admins/' + this.props.logged_in.user_id, {
+    await fetch('https://protected-reaches-40551.herokuapp.com/admins/' + this.props.logged_in.user_id, {
       method: "PUT",
       credentials: 'include',
       body: JSON.stringify({
@@ -88,7 +88,7 @@ class AdminHolder extends Component {
 
   addAdmin = async (adminName, email, password, isLeadAdmin) => {
     console.log('add admin is being called')
-    const admin = await fetch('http://localhost:3000/admins', {
+    const admin = await fetch('https://protected-reaches-40551.herokuapp.com/admins', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify({
@@ -115,7 +115,7 @@ class AdminHolder extends Component {
 
   deleteAdmin = async (id) => {
     if (id !== "") {
-      await fetch('http://localhost:3000/admins/' + id, {
+      await fetch('https://protected-reaches-40551.herokuapp.com/' + id, {
         method: "DELETE",
         credentials: 'include'
       })

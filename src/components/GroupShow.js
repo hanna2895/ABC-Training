@@ -30,7 +30,7 @@ class GroupShow extends Component {
   // maybe receives client name as prop?
   getGroupInfo = async () => {
     if (this.state.groupId) {
-      const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
+      const group = await fetch('https://protected-reaches-40551.herokuapp.com/groups/' + this.state.groupId, {
         method: "GET",
         credentials: 'include'
       })
@@ -56,7 +56,7 @@ class GroupShow extends Component {
 
   editGroup = async (groupName) => {
     console.log('this is what is being called', groupName, this.state.groupId)
-    const group = await fetch('http://localhost:3000/groups/' + this.state.groupId, {
+    const group = await fetch('https://protected-reaches-40551.herokuapp.com/groups/' + this.state.groupId, {
       method: "PUT",
       credentials: 'include',
       body: JSON.stringify({
