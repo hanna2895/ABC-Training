@@ -49,7 +49,7 @@ class AddCourseMaterials extends Component {
   render() {
     console.log(this.state, 'this is state in AddCourseMaterials')
     return (
-      <div class="upload-holder">
+      <div className="upload-holder">
       <Card>
 
         <AppBar title="Select Files to Upload" showMenuIconButton={false}/>
