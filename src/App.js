@@ -34,6 +34,10 @@ class App extends Component {
           }
 
       </div>
+      <footer>
+        <h3> | ABC Training |</h3>
+        <h3> <a href='#'> hi@abctraining.com </a> </h3>
+      </footer>
       </MuiThemeProvider>
     );
   }

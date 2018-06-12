@@ -48,10 +48,22 @@ const PublicContent = ({ showLoginForm }) => {
         </div>
       </div>
       <div className="holder">
-        <h1> News </h1>
-      </div>
-      <div className="holder">
-        <h1> Contact Us </h1>
+        <div className="color-block-2">
+          <h1> News </h1>
+          <div style={placeholder} className="news"/>
+          <h4> Generic headline: we did a thing.</h4>
+          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Suspendisse sed nisi lacus sed viverra. Pharetra massa massa ultricies mi quis hendrerit. Pulvinar etiam non quam lacus. <a>(More...)</a></p>
+          <a href="#"> MORE ARTICLES </a>
+        </div>
+        <div className="color-block-2 purple">
+          <h1> Contact Us </h1>
+          <div style={placeholder2} className="news"/>
+          <p className="emphasis"> ABC TRAINING HEADQUARTERS </p>
+          <p> 16 School St. - Chicago, IL </p>
+
+          <p className="emphasis"> GET IN TOUCH </p>
+          <p> hi@abctraining.com </p>
+        </div>
       </div>
     </div>
   )
@@ -81,4 +93,12 @@ const front = {
 
 const back = {
   backgroundImage: `url(${ backEnd })`
+}
+
+const placeholder = {
+  backgroundImage: `url(https://picsum.photos/500/300/?image=1076)`
+}
+
+const placeholder2 = {
+  backgroundImage: `url(https://picsum.photos/500/300/?image=1078)`
 }
