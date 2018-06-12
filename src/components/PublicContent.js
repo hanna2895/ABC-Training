@@ -66,6 +66,7 @@ const PublicContent = ({ showLoginForm }) => {
         </div>
       </div>
     </div>
+
   )
 }
 
