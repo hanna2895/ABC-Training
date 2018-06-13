@@ -10,13 +10,14 @@ import backEnd from '../Hanna/back-end.jpg';
 
 const PublicContent = ({ showLoginForm }) => {
   return (
-    <div className="home-holder">
+    <div className="home-holder" id="top">
       <div className="homepage">
         <div style={style} className="image"/>
         <div className="home-text"> Connecting you with the people who matter. </div>
         { showLoginForm ? <LoginForm /> : null}
       </div>
       <div className="holder">
+        <div id="core"/>
         <div className="color-block">
           <h1> Core </h1>
           <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tincidunt, orci sed faucibus congue, lectus massa consequat lacus, suscipit consectetur ligula risus nec ipsum. Proin ac accumsan turpis, eu aliquet urna. Mauris ut auctor diam.</p>
@@ -24,10 +25,11 @@ const PublicContent = ({ showLoginForm }) => {
         </div>
         <div style={imgStyle} className="small-image"/>
       </div>
-      <div className="holder">
+      <div className="holder" >
+        <div id="our-team"/>
         <div className="color-block wide">
           <h1> Our Team </h1>
-          <div className="team-holder">
+          <div className="team-holder" >
             <div>
               <div style={CEO} className="team-image"></div>
               <h4>Hannah Werman <br/> CEO</h4>
@@ -47,15 +49,15 @@ const PublicContent = ({ showLoginForm }) => {
           </div>
         </div>
       </div>
-      <div className="holder">
-        <div className="color-block-2">
+      <div className="holder" >
+        <div className="color-block-2" id="news">
           <h1> News </h1>
           <div style={placeholder} className="news"/>
           <h4> Generic headline: we did a thing.</h4>
           <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Suspendisse sed nisi lacus sed viverra. Pharetra massa massa ultricies mi quis hendrerit. Pulvinar etiam non quam lacus. <a>(More...)</a></p>
           <a href="#"> MORE ARTICLES </a>
         </div>
-        <div className="color-block-2 purple">
+        <div className="color-block-2 purple" id="news">
           <h1> Contact Us </h1>
           <div style={placeholder2} className="news"/>
           <p className="emphasis"> ABC TRAINING HEADQUARTERS </p>

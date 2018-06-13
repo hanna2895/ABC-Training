@@ -246,11 +246,12 @@ img {
   background-size: cover;
   z-index: 0;
   position: absolute;
+  top: 12vh;
 }
 
 .homepage {
   display: flex;
-  height: 90vh;
+  height: 100vh;
 }
 
 .home-text {
@@ -279,7 +280,8 @@ img {
 
 .color-block-2 {
   background-color: #F8EFFF;
-  margin-top: 25vh;
+  margin-top: 10vh;
+  padding-top: -10vh;
   width: 47.5vw;
   height: 65vh;
   margin-left: 2.5vw;
@@ -288,7 +290,7 @@ img {
   z-index: 0;
   text-align: center;
   /* margin-bottom: 5vh; */
-  margin-bottom: 10vh;
+  margin-bottom: 15vh;
 }
 
 .purple {
@@ -324,15 +326,25 @@ img {
 .holder {
   display: flex;
   height: 50vh;
+  padding-top: 10vh;
+  margin-top: -10vh;
+  margin-bottom: 10vh;
 }
 
 .wide {
   width: 95vw;
-  margin-top: 10vh;
+  /* margin-top: 20vh; */
   display: flex;
   flex-direction: column;
   height: 55vh;
-  margin-bottom: 20vh;
+  margin-bottom: 10vh;
+
+  /* margin-top: -10vh; */
+}
+
+#our-team, #core{
+  margin-top: -20vh;
+  padding-top: 10vh;
 }
 
 .wide > h1 {

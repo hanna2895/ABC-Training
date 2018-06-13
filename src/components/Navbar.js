@@ -26,12 +26,12 @@ class Navbar extends Component {
 
 
           <div className="button-holder">
-              <FlatButton className="button button-primary">HOME</FlatButton>
-              <FlatButton className="button button-primary" style={long}>CORE SERVICES</FlatButton>
-              <FlatButton className="button button-primary">OUR TEAM</FlatButton>
-              <FlatButton className="button button-primary">NEWS</FlatButton>
-              <FlatButton className="button button-primary">CONTACT US</FlatButton>
-              <FlatButton onClick={this.props.toggleLoginForm} className="button button-primary">LOG IN</FlatButton>
+              <FlatButton className="button button-primary" >HOME</FlatButton>
+              <FlatButton className="button button-primary" style={long} href="#core">CORE SERVICES</FlatButton>
+              <FlatButton className="button button-primary" href="#our-team">OUR TEAM</FlatButton>
+              <FlatButton className="button button-primary" href="#news">NEWS</FlatButton>
+              <FlatButton className="button button-primary" href="#news">CONTACT US</FlatButton>
+              <FlatButton onClick={this.props.toggleLoginForm} className="button button-primary" href="#top">LOG IN</FlatButton>
           </div>
 
           {this.props.logged_in.logged_in ? <div className="logout">

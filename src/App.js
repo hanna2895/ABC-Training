@@ -27,17 +27,19 @@ class App extends Component {
     return (
       <MuiThemeProvider>
       <div className="App">
-        <Navbar toggleLoginForm={this.toggleLoginForm} />
-          { logged_in ?
-            <ContentHolder />
-            : <PublicContent showLoginForm={this.state.showLoginForm}/>
-          }
+        <div>
+          <Navbar toggleLoginForm={this.toggleLoginForm} />
+            { logged_in ?
+              <ContentHolder />
+              : <PublicContent showLoginForm={this.state.showLoginForm}/>
+            }
 
+        </div>
+        <footer>
+          <h3> | ABC Training |</h3>
+          <h3> <a href='#'> hi@abctraining.com </a> </h3>
+        </footer>
       </div>
-      <footer>
-        <h3> | ABC Training |</h3>
-        <h3> <a href='#'> hi@abctraining.com </a> </h3>
-      </footer>
       </MuiThemeProvider>
     );
   }
