@@ -33,7 +33,7 @@ class LoginForm extends Component {
   checkForMessage = () => {
     if (this.props.logged_in.message !== "") {
       return (
-        <p> {this.props.logged_in.message} </p>
+        <p className="message"> {this.props.logged_in.message} </p>
       )
     }
   }

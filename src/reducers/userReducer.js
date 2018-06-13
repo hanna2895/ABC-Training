@@ -22,7 +22,7 @@ export default function user_type(state = initialState, action) {
     case LOGIN_FAILED:
       return {
         ...state,
-        message: "Your username or password was incorrect. Please try again or contact your system administrator."
+        message: "Your username or password was incorrect."
       }
     case LOGGED_OUT:
       return {
