@@ -40,7 +40,6 @@ class LoginForm extends Component {
 
   render() {
     const message = this.checkForMessage()
-    console.log(this.props, 'this is props in login form')
     return (
       <div className="loginForm">
         <TextField className="loginField" hintText="Email" type="text" name="email" onChange={this.handleInput}/>

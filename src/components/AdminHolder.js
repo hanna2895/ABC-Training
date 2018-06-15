@@ -4,7 +4,8 @@ import AdminShow from './AdminShow';
 import { connect } from 'react-redux';
 import EditAdmin from './EditAdmin';
 import AddAdmin from './AddAdmin';
-import DeleteModal from './DeleteModal'
+import DeleteModal from './DeleteModal';
+import * as adminActions from '../actions/adminActions';
 
 
 class AdminHolder extends Component {
@@ -27,23 +28,13 @@ class AdminHolder extends Component {
   }
 
   loadAdminList = () => {
-    this.getAdmins()
-      .then((admins) => {
-        this.setState({admins: admins})
+    this.props.getAdmins()
+      .then(() => {
+        this.setState({admins: this.props.admins.admins})
       })
       .catch((err) => {
         console.log(err)
       })
-  }
-
-  getAdmins = async () => {
-    const adminsJson = await fetch('https://protected-reaches-40551.herokuapp.com/admins', {
-      method: "GET",
-      credentials: 'include'
-    });
-    const admins = await adminsJson.json();
-    const adminArray = admins.admins
-    return adminArray
   }
 
   showLoggedAdmin = async () => {
@@ -147,9 +138,17 @@ class AdminHolder extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state, 'this is state from map state to props in admin holder')
   return {
-    logged_in: state.logged_in
+    logged_in: state.logged_in,
+    admins: state.admins
   }
 }
 
-export default connect(mapStateToProps)(AdminHolder)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAdmins: () => dispatch(adminActions.getAdmins())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminHolder);
