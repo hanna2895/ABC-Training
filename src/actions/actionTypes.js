@@ -9,4 +9,5 @@ export const LOGGED_OUT = "LOGGED_OUT";
 
 // admin actions
 
-export const GET_ADMINS = 'GET_ADMINS'
+export const GET_ADMINS = 'GET_ADMINS';
+export const LOGGED_ADMIN = 'LOGGED_ADMIN';

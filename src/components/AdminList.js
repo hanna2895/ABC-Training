@@ -28,14 +28,8 @@ class AdminList extends Component {
   }
 
   handleSelect = (selectedRows, index, value) => {
-    console.log('clicked')
-    console.log(selectedRows, 'selected')
-    console.log(value, 'value', value.currentTarget.id, 'currenttarget.id', value.currentTarget.innerHTML, 'name')
-    console.log(index, 'this is index')
-    // console.log(e.target, 'this is e.target')
     this.setState({
       selected: selectedRows,
-      // selectedAdmin: e.target.innerHTML,
       selectedAdminId: value.currentTarget.id
     })
   }
@@ -62,7 +56,6 @@ class AdminList extends Component {
         </TableRow>
       )
     })
-    console.log(this.state, 'this is state')
 
     return (
 

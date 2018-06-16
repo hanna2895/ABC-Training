@@ -10,7 +10,6 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
 const AdminShow = ({ adminName, email, toggleEditAdmin, isLeadAdmin }) => {
-  console.log(adminName, email)
   return (
     <Card>
       <AppBar showMenuIconButton={false} title="Admin Settings" iconElementRight={<FlatButton label="Edit My Information" onClick={toggleEditAdmin} />}/>

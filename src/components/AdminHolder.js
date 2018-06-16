@@ -24,7 +24,19 @@ class AdminHolder extends Component {
 
   componentDidMount() {
     this.loadAdminList()
-    this.showLoggedAdmin()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.email) {
+      return
+    } else {
+      this.props.showLoggedAdmin(this.props.logged_in.user_id)
+      this.setState({
+        adminName: this.props.logged_in.user_name,
+        email: nextProps.email,
+        isLeadAdmin: nextProps.isLeadAdmin
+      })
+    }
   }
 
   loadAdminList = () => {
@@ -37,16 +49,11 @@ class AdminHolder extends Component {
       })
   }
 
-  showLoggedAdmin = async () => {
-    const adminJson = await fetch('https://protected-reaches-40551.herokuapp.com/admins/' + this.props.logged_in.user_id, {
-      method: "GET",
-      credentials: 'include'
-    })
-    const admin = await adminJson.json();
+  showLoggedAdmin = () => {
     this.setState({
-      adminName: admin.admin.name,
-      email: admin.admin.email,
-      isLeadAdmin: admin.admin.is_lead_admin
+      adminName: this.props.logged_in.user_name,
+      email: this.props.email,
+      isLeadAdmin: this.props.isLeadAdmin
     })
   }
 
@@ -138,16 +145,20 @@ class AdminHolder extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state, 'this is state from map state to props in admin holder')
   return {
     logged_in: state.logged_in,
-    admins: state.admins
+    admins: state.admins,
+    email: state.admins.admin_email,
+    isLeadAdmin: state.admins.admin_isLeadAdmin,
+    name: state.user_name,
+    id: state.user_id
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAdmins: () => dispatch(adminActions.getAdmins())
+    getAdmins: () => dispatch(adminActions.getAdmins()),
+    showLoggedAdmin: (id) => dispatch(adminActions.showLoggedAdmin(id))
   }
 }
 
