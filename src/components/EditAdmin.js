@@ -5,6 +5,9 @@ import Checkbox from 'material-ui/Checkbox';
 import {Card} from 'material-ui/Card';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import { connect } from 'react-redux';
+import * as adminActions from '../actions/adminActions';
+
 
 class EditAdmin extends Component {
   constructor() {
@@ -13,7 +16,7 @@ class EditAdmin extends Component {
       adminName: "",
       email: "",
       password: "",
-      isLeadAdmin: ""
+      isLeadAdmin: null
     }
   }
 
@@ -36,7 +39,8 @@ class EditAdmin extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.editAdmin(this.state.adminName, this.state.email, this.state.password)
+    this.props.editAdmin(this.props.id, this.state.adminName, this.state.email, this.state.password)
+    this.props.editAdminComponent()
   }
 
   render() {
@@ -54,4 +58,16 @@ class EditAdmin extends Component {
   }
 }
 
-export default EditAdmin;
+const mapStateToProps = (state) => {
+  return {
+    id: state.logged_in.user_id
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editAdmin: (id, name, email, password) => dispatch(adminActions.editAdmin(id, name, email, password))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditAdmin);

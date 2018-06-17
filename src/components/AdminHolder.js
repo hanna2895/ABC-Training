@@ -32,7 +32,7 @@ class AdminHolder extends Component {
     } else {
       this.props.showLoggedAdmin(this.props.logged_in.user_id)
       this.setState({
-        adminName: this.props.logged_in.user_name,
+        adminName: nextProps.name,
         email: nextProps.email,
         isLeadAdmin: nextProps.isLeadAdmin
       })
@@ -51,7 +51,7 @@ class AdminHolder extends Component {
 
   showLoggedAdmin = () => {
     this.setState({
-      adminName: this.props.logged_in.user_name,
+      adminName: this.props.name,
       email: this.props.email,
       isLeadAdmin: this.props.isLeadAdmin
     })
@@ -63,19 +63,9 @@ class AdminHolder extends Component {
     })
   }
 
-  editAdmin = async (adminName, email, password) => {
-    console.log('editadmin clicked')
-    await fetch('https://protected-reaches-40551.herokuapp.com/admins/' + this.props.logged_in.user_id, {
-      method: "PUT",
-      credentials: 'include',
-      body: JSON.stringify({
-        name: adminName,
-        email: email,
-        password: password
-      })
-    })
+  editAdminComponent = () => {
+    this.loadAdminList();
     this.toggleEditAdmin();
-    this.showLoggedAdmin();
   }
 
   toggleAddAdmin = () => {
@@ -125,11 +115,11 @@ class AdminHolder extends Component {
   render() {
     return(
       <div className="admin-holder">
-        {this.state.editingAdmin ? <EditAdmin adminName={this.state.adminName} email={this.state.email} isLeadAdmin={this.state.isLeadAdmin} editAdmin={this.editAdmin} toggleEditAdmin={this.toggleEditAdmin}/>
+        {this.state.editingAdmin ? <EditAdmin adminName={this.state.adminName} email={this.state.email} isLeadAdmin={this.state.isLeadAdmin} editAdminComponent={this.editAdminComponent} toggleEditAdmin={this.toggleEditAdmin}/>
         : <div>{ this.state.addAdmin ? <AddAdmin addAdmin={this.addAdmin} toggleAddAdmin={this.toggleAddAdmin}/>
           : <div> { this.state.showDeleteModal ? <DeleteModal toggleDeleteModal={this.toggleDeleteModal} deleteAdmin={this.deleteAdmin} selectedAdmin={this.state.selectedAdmin} showDeleteModal={this.state.showDeleteModal}/>
             :<div>
-              <AdminShow adminName={this.state.adminName} email={this.state.email} toggleEditAdmin={this.toggleEditAdmin} isLeadAdmin={this.state.isLeadAdmin}/>
+              <AdminShow toggleEditAdmin={this.toggleEditAdmin} />
               <AdminList admins={this.state.admins} toggleAddAdmin={this.toggleAddAdmin} toggleDeleteModal={this.toggleDeleteModal}/>
             </div>
           } </div>
@@ -150,15 +140,16 @@ const mapStateToProps = (state) => {
     admins: state.admins,
     email: state.admins.admin_email,
     isLeadAdmin: state.admins.admin_isLeadAdmin,
-    name: state.user_name,
-    id: state.user_id
+    name: state.admins.admin_name,
+    id: state.logged_in.user_id
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getAdmins: () => dispatch(adminActions.getAdmins()),
-    showLoggedAdmin: (id) => dispatch(adminActions.showLoggedAdmin(id))
+    showLoggedAdmin: (id) => dispatch(adminActions.showLoggedAdmin(id)),
+    editAdmin: (id, name, email, password) => dispatch(adminActions.editAdmin(id, name, email, password))
   }
 }
 

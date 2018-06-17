@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { GET_ADMINS, LOGGED_ADMIN } from '../actions/actionTypes';
+import { GET_ADMINS, LOGGED_ADMIN, EDIT_ADMIN } from '../actions/actionTypes';
 
 export default function admins(state = initialState, action) {
   switch(action.type) {
@@ -12,7 +12,15 @@ export default function admins(state = initialState, action) {
       return {
         ...state,
         admin_email: action.email,
-        admin_isLeadAdmin: action.isLeadAdmin
+        admin_isLeadAdmin: action.isLeadAdmin,
+        admin_name: action.adminName
+      }
+    case EDIT_ADMIN:
+      return {
+        ...state,
+        admin_email: action.email,
+        admin_isLeadAdmin: action.isLeadAdmin,
+        admin_name: action.name
       }
     default:
       return state;

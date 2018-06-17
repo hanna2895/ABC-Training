@@ -28,5 +28,25 @@ export function showLoggedAdmin(id) {
 }
 
 export function returnLoggedAdmin(json) {
-  return {type: types.LOGGED_ADMIN, email: json.admin.email, isLeadAdmin: json.admin.is_lead_admin}
+  return {type: types.LOGGED_ADMIN, email: json.admin.email, isLeadAdmin: json.admin.is_lead_admin, adminName: json.admin.name}
+}
+
+export function editAdmin(id, name, email, password) {
+  return dispatch => {
+    return fetch('https://protected-reaches-40551.herokuapp.com/admins/' + id, {
+      method: "PUT",
+      credentials: 'include',
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password
+      })
+    })
+    .then(response => response.json())
+    .then(json => dispatch(returnNewAdmin(json)))
+  }
+}
+
+export function returnNewAdmin(json) {
+  return {type: types.EDIT_ADMIN, name: json.admin.name, email: json.admin.email, isLeadAdmin: json.admin.is_lead_admin}
 }
