@@ -76,19 +76,20 @@ class AdminHolder extends Component {
 
   addAdmin = async (adminName, email, password, isLeadAdmin) => {
     console.log('add admin is being called')
-    const admin = await fetch('https://protected-reaches-40551.herokuapp.com/admins', {
-      method: "POST",
-      credentials: 'include',
-      body: JSON.stringify({
-        name: adminName,
-        email: email,
-        password: password,
-        is_lead_admin: isLeadAdmin
-      })
-    })
-    console.log(admin)
-    const adminParsed = await admin.json();
-    console.log(adminParsed)
+    // const admin = await fetch('https://protected-reaches-40551.herokuapp.com/admins', {
+    //   method: "POST",
+    //   credentials: 'include',
+    //   body: JSON.stringify({
+    //     name: adminName,
+    //     email: email,
+    //     password: password,
+    //     is_lead_admin: isLeadAdmin
+    //   })
+    // })
+    this.props.addAdmin(adminName, email, password, isLeadAdmin)
+    // console.log(admin)
+    // const adminParsed = await admin.json();
+    // console.log(adminParsed)
     this.loadAdminList();
     this.toggleAddAdmin();
 
@@ -149,7 +150,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAdmins: () => dispatch(adminActions.getAdmins()),
     showLoggedAdmin: (id) => dispatch(adminActions.showLoggedAdmin(id)),
-    editAdmin: (id, name, email, password) => dispatch(adminActions.editAdmin(id, name, email, password))
+    editAdmin: (id, name, email, password) => dispatch(adminActions.editAdmin(id, name, email, password)),
+    addAdmin: (name, email, password, isLeadAdmin) => dispatch(adminActions.addAdmin(name, email, password, isLeadAdmin))
   }
 }
 

@@ -1,5 +1,7 @@
 import * as types from './actionTypes';
 
+
+// GET ALL THE ADMINS
 export function getAdmins() {
   return dispatch => {
     return fetch('https://protected-reaches-40551.herokuapp.com/admins', {
@@ -15,6 +17,7 @@ export function returnAdmins(json) {
   return {type: types.GET_ADMINS, admins: json.admins}
 }
 
+// GET THE ADMIN THAT IS CURRENTLY LOGGED IN
 export function showLoggedAdmin(id) {
   return dispatch => {
     return fetch('https://protected-reaches-40551.herokuapp.com/admins/' + id, {
@@ -31,6 +34,7 @@ export function returnLoggedAdmin(json) {
   return {type: types.LOGGED_ADMIN, email: json.admin.email, isLeadAdmin: json.admin.is_lead_admin, adminName: json.admin.name}
 }
 
+// EDIT THE ADMIN THAT IS CURRENTLY LOGGED IN
 export function editAdmin(id, name, email, password) {
   return dispatch => {
     return fetch('https://protected-reaches-40551.herokuapp.com/admins/' + id, {
@@ -43,10 +47,30 @@ export function editAdmin(id, name, email, password) {
       })
     })
     .then(response => response.json())
-    .then(json => dispatch(returnNewAdmin(json)))
+    .then(json => dispatch(returnEditedAdmin(json)))
   }
 }
 
-export function returnNewAdmin(json) {
+export function returnEditedAdmin(json) {
   return {type: types.EDIT_ADMIN, name: json.admin.name, email: json.admin.email, isLeadAdmin: json.admin.is_lead_admin}
 }
+
+// ADD A NEW ADMIN
+export function addAdmin(name, email, password, isLeadAdmin) {
+  return dispatch => {
+    return fetch('https://protected-reaches-40551.herokuapp.com/admins/', {
+      method: "POST",
+      credentials: 'include',
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        is_lead_admin: isLeadAdmin
+      })
+    })
+    .then(response => response.json())
+    // .then(json => dispatch(returnNewAdmin(json)))
+  }
+}
+
+// SEND BACK THE NEW / EDITED ADMIN TO THE REDUCER TO UPDATE THE STATE WITH THAT PERTINENT INFORMATION
