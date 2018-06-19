@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux';
+import * as adminActions from '../actions/adminActions';
 
 class DeleteModal extends Component {
   state = {
@@ -24,13 +26,15 @@ class DeleteModal extends Component {
       this.props.deleteGroup(this.props.selectedGroup)
     } else if (this.props.deleteStudent) {
       this.props.deleteStudent(this.props.studentId)
-    } else if (this.props.deleteAdmin) {
+    } else if (this.props.selectedAdmin) {
       this.props.deleteAdmin(this.props.selectedAdmin)
+      this.props.afterDeleteAdmin()
     }
     // this.handleClose();
   }
 
   render() {
+    console.log(this.props, 'this is props in deleteodal')
     const actions = [
       <RaisedButton
         className="button button-wide"
@@ -54,7 +58,14 @@ class DeleteModal extends Component {
   }
 }
 
-export default DeleteModal;
+// const mapStateToProps = (state) => {
+//   return;
+// }
 
-// <button onClick={this.props.toggleDeleteModal}> Cancel </button>
-// <button onClick={this.handleSubmit}> Confirm Delete </button>
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteAdmin: (id) => dispatch(adminActions.deleteAdmin(id))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DeleteModal);

@@ -22,9 +22,9 @@ class AdminHolder extends Component {
     }
   }
 
-  componentDidMount() {
-    this.loadAdminList()
-  }
+  // componentDidMount() {
+  //   this.loadAdminList()
+  // }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.email) {
@@ -39,15 +39,15 @@ class AdminHolder extends Component {
     }
   }
 
-  loadAdminList = () => {
-    this.props.getAdmins()
-      .then(() => {
-        this.setState({admins: this.props.admins.admins})
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  // loadAdminList = () => {
+  //   this.props.getAdmins()
+  //     .then(() => {
+  //       this.setState({admins: this.props.admins.admins})
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
   showLoggedAdmin = () => {
     this.setState({
@@ -64,7 +64,7 @@ class AdminHolder extends Component {
   }
 
   editAdminComponent = () => {
-    this.loadAdminList();
+    // this.loadAdminList();
     this.toggleEditAdmin();
   }
 
@@ -74,25 +74,10 @@ class AdminHolder extends Component {
     })
   }
 
-  addAdmin = async (adminName, email, password, isLeadAdmin) => {
-    console.log('add admin is being called')
-    // const admin = await fetch('https://protected-reaches-40551.herokuapp.com/admins', {
-    //   method: "POST",
-    //   credentials: 'include',
-    //   body: JSON.stringify({
-    //     name: adminName,
-    //     email: email,
-    //     password: password,
-    //     is_lead_admin: isLeadAdmin
-    //   })
-    // })
+  addAdmin = (adminName, email, password, isLeadAdmin) => {
     this.props.addAdmin(adminName, email, password, isLeadAdmin)
-    // console.log(admin)
-    // const adminParsed = await admin.json();
-    // console.log(adminParsed)
-    this.loadAdminList();
+    // this.loadAdminList();
     this.toggleAddAdmin();
-
   }
 
   toggleDeleteModal = (id) => {
@@ -102,15 +87,12 @@ class AdminHolder extends Component {
     })
   }
 
-  deleteAdmin = async (id) => {
-    if (id !== "") {
-      await fetch('https://protected-reaches-40551.herokuapp.com/' + id, {
-        method: "DELETE",
-        credentials: 'include'
-      })
-      this.loadAdminList();
-      this.toggleDeleteModal();
-    }
+  afterDeleteAdmin = () => {
+
+      // this.loadAdminList()
+
+      this.toggleDeleteModal()
+
   }
 
   render() {
@@ -118,10 +100,10 @@ class AdminHolder extends Component {
       <div className="admin-holder">
         {this.state.editingAdmin ? <EditAdmin adminName={this.state.adminName} email={this.state.email} isLeadAdmin={this.state.isLeadAdmin} editAdminComponent={this.editAdminComponent} toggleEditAdmin={this.toggleEditAdmin}/>
         : <div>{ this.state.addAdmin ? <AddAdmin addAdmin={this.addAdmin} toggleAddAdmin={this.toggleAddAdmin}/>
-          : <div> { this.state.showDeleteModal ? <DeleteModal toggleDeleteModal={this.toggleDeleteModal} deleteAdmin={this.deleteAdmin} selectedAdmin={this.state.selectedAdmin} showDeleteModal={this.state.showDeleteModal}/>
+          : <div> { this.state.showDeleteModal ? <DeleteModal toggleDeleteModal={this.toggleDeleteModal} afterDeleteAdmin={this.afterDeleteAdmin} selectedAdmin={this.state.selectedAdmin} showDeleteModal={this.state.showDeleteModal}/>
             :<div>
               <AdminShow toggleEditAdmin={this.toggleEditAdmin} />
-              <AdminList admins={this.state.admins} toggleAddAdmin={this.toggleAddAdmin} toggleDeleteModal={this.toggleDeleteModal}/>
+              <AdminList toggleAddAdmin={this.toggleAddAdmin} toggleDeleteModal={this.toggleDeleteModal}/>
             </div>
           } </div>
 
@@ -151,7 +133,8 @@ const mapDispatchToProps = (dispatch) => {
     getAdmins: () => dispatch(adminActions.getAdmins()),
     showLoggedAdmin: (id) => dispatch(adminActions.showLoggedAdmin(id)),
     editAdmin: (id, name, email, password) => dispatch(adminActions.editAdmin(id, name, email, password)),
-    addAdmin: (name, email, password, isLeadAdmin) => dispatch(adminActions.addAdmin(name, email, password, isLeadAdmin))
+    addAdmin: (name, email, password, isLeadAdmin) => dispatch(adminActions.addAdmin(name, email, password, isLeadAdmin)),
+    // deleteAdmin: (id) => dispatch(adminActions.deleteAdmin(id))
   }
 }
 

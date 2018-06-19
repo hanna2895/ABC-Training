@@ -69,8 +69,16 @@ export function addAdmin(name, email, password, isLeadAdmin) {
       })
     })
     .then(response => response.json())
-    // .then(json => dispatch(returnNewAdmin(json)))
   }
 }
 
-// SEND BACK THE NEW / EDITED ADMIN TO THE REDUCER TO UPDATE THE STATE WITH THAT PERTINENT INFORMATION
+// DELETE AN ADMIN
+export function deleteAdmin(id) {
+  return dispatch => {
+    return fetch('https://protected-reaches-40551.herokuapp.com/admins/' + id, {
+      method: "DELETE",
+      credentials: 'include'
+    })
+    .then(response => response.json())
+  }
+}

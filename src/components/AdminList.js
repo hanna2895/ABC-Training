@@ -13,6 +13,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux';
+import * as adminActions from '../actions/adminActions';
 
 
 
@@ -21,10 +23,31 @@ class AdminList extends Component {
   constructor() {
     super();
     this.state = {
+      admins: [],
       selected: "",
       selectedAdmin: "",
       selectedAdminId: ""
     }
+  }
+
+  componentDidMount() {
+    this.loadAdminList()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.admins != this.state.admins) {
+      this.loadAdminList()
+    }
+  }
+
+  loadAdminList = () => {
+    this.props.getAdmins()
+      .then(() => {
+        this.setState({admins: this.props.admins.admins})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   handleSelect = (selectedRows, index, value) => {
@@ -46,7 +69,7 @@ class AdminList extends Component {
   }
 
   render() {
-    const admins = this.props.admins
+    const admins = this.state.admins
     const ListOfAdmins = admins.map((admin, index) => {
       let id = admin.id
       return (
@@ -74,7 +97,19 @@ class AdminList extends Component {
 
 }
 
-export default AdminList;
+const mapStateToProps = (state) => {
+  return {
+    admins: state.admins
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAdmins: () => dispatch(adminActions.getAdmins())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminList);
 
 
 
