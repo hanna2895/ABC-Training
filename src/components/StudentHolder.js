@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import StudentList from './StudentList';
 import AddStudent from './AddStudent';
 import StudentShow from './StudentShow';
+import { connect } from 'react-redux';
+import * as studentActions from '../actions/studentActions'
 
 class StudentHolder extends Component {
   constructor() {
@@ -12,30 +14,6 @@ class StudentHolder extends Component {
       viewingStudent: false,
       selectedStudentId: ""
     }
-  }
-
-  componentDidMount() {
-    this.updateStudentList()
-  }
-
-  updateStudentList = () => {
-    this.getStudents()
-      .then((students) => {
-        this.setState({students: students})
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-  }
-
-  getStudents = async () => {
-    const studentsJson = await fetch('https://protected-reaches-40551.herokuapp.com/students', {
-      method: "GET",
-      credentials: 'include'
-    });
-    const students = await studentsJson.json();
-    const studentsArray = students.students
-    return studentsArray
   }
 
   toggleAddStudent = () => {
@@ -79,11 +57,7 @@ class StudentHolder extends Component {
             : <StudentList students={this.state.students} toggleAddStudent={this.toggleAddStudent} toggleViewStudent={this.toggleViewStudent}/>
           } </div>
         }
-
-
-
-
-
+        
       </div>
     )
   }

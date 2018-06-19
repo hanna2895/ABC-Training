@@ -9,6 +9,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux';
+import * as studentActions from '../actions/studentActions';
 
 
 // when the user clicks on each student, it takes them to the show / edit page. they can choose to 'go back' or 'save and close', which will update the user's info
@@ -16,10 +18,24 @@ class StudentList extends Component {
   constructor() {
     super();
     this.state = {
+      students: [],
       selected: "",
-      // selectedStudent: "",
       selectedStudentId: ""
     }
+  }
+
+  componentDidMount() {
+    this.updateStudentList()
+  }
+
+  updateStudentList = () => {
+    this.props.getStudents()
+      .then(() => {
+        this.setState({students: this.props.students.students})
+      })
+      .catch((err) => {
+        console.log(err)
+      });
   }
 
   handleSelect = (selectedRows, index, value) => {
@@ -39,7 +55,8 @@ class StudentList extends Component {
   }
 
   render() {
-    const ListOfStudents = this.props.students.map((student, i) => {
+    const students = this.state.students
+    const ListOfStudents = students.map((student, i) => {
       let id = student.id
       return(
         <TableRow key={i} id={student.id} selected={this.state.selectedStudentId == id ? true : false} >
@@ -65,4 +82,16 @@ class StudentList extends Component {
 
 }
 
-export default StudentList;
+const mapStateToProps = (state) => {
+  return {
+    students: state.students
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getStudents: () => dispatch(studentActions.getStudents())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentList);

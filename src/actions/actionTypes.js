@@ -12,3 +12,7 @@ export const LOGGED_OUT = "LOGGED_OUT";
 export const GET_ADMINS = 'GET_ADMINS';
 export const LOGGED_ADMIN = 'LOGGED_ADMIN';
 export const EDIT_ADMIN = 'EDIT_ADMIN';
+
+// student actions
+
+export const GET_STUDENTS = 'GET_STUDENTS';

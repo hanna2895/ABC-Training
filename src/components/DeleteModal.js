@@ -28,7 +28,7 @@ class DeleteModal extends Component {
       this.props.deleteStudent(this.props.studentId)
     } else if (this.props.selectedAdmin) {
       this.props.deleteAdmin(this.props.selectedAdmin)
-      this.props.afterDeleteAdmin()
+      this.props.toggleDeleteModal()
     }
     // this.handleClose();
   }

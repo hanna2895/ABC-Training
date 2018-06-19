@@ -9,7 +9,6 @@ import {
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
-import * as adminActions from '../actions/adminActions';
 
 class AdminShow extends Component {
   constructor() {
@@ -20,14 +19,6 @@ class AdminShow extends Component {
       isLeadAdmin: ""
     }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     adminName: nextProps.adminName,
-  //     email: nextProps.email,
-  //     isLeadAdmin: nextProps.isLeadAdmin
-  //   })
-  // }
 
   render() {
     return (
